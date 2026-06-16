@@ -254,17 +254,16 @@
   </section>
 
   <section id="contacto" class="section contact-section">
-    <div class="shell contact-layout">
+    <div class="shell contact-shell">
       <div class="contact-copy">
         <p class="eyebrow">Contacto</p>
-        <h2>Hablemos de la solución que tu empresa necesita</h2>
+        <h2>Hablemos de tu proyecto</h2>
         <p class="contact-lead">
           Cuéntanos qué quieres mejorar, construir o automatizar. Revisaremos tu solicitud y te
-          contactaremos para orientarte sobre la mejor forma de convertirla en una solución
-          tecnológica.
+          propondremos una ruta clara para convertirla en una solución tecnológica funcional.
         </p>
         <p>
-          No necesitas saber qué tecnología usar. Solo comparte tu idea, necesidad o problema;
+          No necesitas saber qué tecnología usar. Llegas con una idea, necesidad o problema;
           nosotros te ayudamos a encontrar el mejor camino.
         </p>
         <ul class="trust-list" aria-label="Puntos de confianza del contacto">
@@ -274,10 +273,10 @@
             <span aria-hidden="true">✓</span>Soluciones a medida, sin obligarte a saber tecnología.
           </li>
         </ul>
-        <div class="contact-email-card">
-          <span>Correo de contacto</span>
+        <p class="contact-email-note">
+          También puedes escribirnos a
           <a [href]="'mailto:' + contact.contactEmail">{{ contact.contactEmail }}</a>
-        </div>
+        </p>
         <small class="privacy-note">
           Usaremos tus datos únicamente para responder tu solicitud y dar seguimiento a tu consulta.
         </small>
@@ -290,7 +289,7 @@
         novalidate
       >
         <div class="form-heading">
-          <p class="eyebrow">Solicitud inicial</p>
+          <p class="eyebrow">Primer contacto</p>
           <h3>Cuéntanos sobre tu proyecto</h3>
           <p>Completa el formulario y revisaremos la mejor forma de ayudarte.</p>
         </div>
@@ -368,7 +367,7 @@
           </div>
 
           <div class="field">
-            <label for="needType">¿Qué quieres construir o mejorar? <span>*</span></label>
+            <label for="needType">¿Qué necesitas? <span>*</span></label>
             <select
               id="needType"
               formControlName="needType"
@@ -383,16 +382,6 @@
             @if (shouldShowError('needType')) {
               <p class="field-error" id="needType-error">{{ getErrorMessage('needType') }}</p>
             }
-          </div>
-
-          <div class="field">
-            <label for="budgetRange">Presupuesto estimado</label>
-            <select id="budgetRange" formControlName="budgetRange">
-              <option value="">Selecciona una opción</option>
-              @for (option of contact.budgetOptions; track option.value) {
-                <option [value]="option.value">{{ option.label }}</option>
-              }
-            </select>
           </div>
 
           <div class="field field-full">
@@ -422,7 +411,7 @@
             "
           />
           <label for="privacyAccepted"
-            >Acepto que HMODevelopers use esta información para responder mi solicitud de contacto.
+            >Acepto que HMODevelopers use mis datos para responder esta solicitud.
             <span>*</span></label
           >
         </div>

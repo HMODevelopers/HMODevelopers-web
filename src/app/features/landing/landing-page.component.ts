@@ -5,7 +5,6 @@ import { finalize } from 'rxjs';
 import { CONTACT_CONFIG } from '../../core/config/contact.config';
 import { LANDING_CONTENT } from '../../core/config/landing-content.config';
 import {
-  ContactBudgetRange,
   ContactNeedType,
   ContactRequestPayload,
 } from '../../core/models/contact-request.model';
@@ -33,11 +32,10 @@ export class LandingPageComponent {
 
   protected readonly contactForm = this.formBuilder.nonNullable.group({
     fullName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(120)]],
-    company: ['', [Validators.maxLength(150)]],
+    company: ['', [Validators.required,Validators.maxLength(150)]],
     email: ['', [Validators.required, Validators.email, Validators.maxLength(180)]],
-    phone: ['', [Validators.maxLength(30), Validators.pattern(/^[0-9+\-()\s]*$/)]],
+    phone: ['', [Validators.required, Validators.maxLength(30), Validators.pattern(/^[0-9+\-()\s]*$/)]],
     needType: ['', [Validators.required]],
-    budgetRange: [''],
     message: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(1500)]],
     privacyAccepted: [false, [Validators.requiredTrue]],
     // Honeypot antispam preparado para la validación definitiva del backend.
@@ -158,7 +156,6 @@ export class LandingPageComponent {
       email: value.email.trim(),
       phone: value.phone.trim() || null,
       needType: value.needType as ContactNeedType,
-      budgetRange: (value.budgetRange as ContactBudgetRange) || null,
       message: value.message.trim(),
       privacyAccepted: value.privacyAccepted,
       source: 'landing',
@@ -175,7 +172,6 @@ export class LandingPageComponent {
       email: '',
       phone: '',
       needType: '',
-      budgetRange: '',
       message: '',
       privacyAccepted: false,
       website: '',
