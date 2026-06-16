@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
   Component,
-  DestroyRef,
+  AfterViewInit,
   ElementRef,
   PLATFORM_ID,
   ViewChild,
@@ -25,15 +25,15 @@ import { Testimonial } from './models/testimonial.model';
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
 })
-export class LandingPageComponent {
-  @ViewChild('testimonialViewport') private testimonialViewport?: ElementRef<HTMLElement>;
+export class LandingPageComponent implements AfterViewInit {
+  @ViewChild('carouselViewport')
+  private carouselViewport?: ElementRef<HTMLElement>;
 
   private readonly title = inject(Title);
   private readonly meta = inject(Meta);
   private readonly formBuilder = inject(FormBuilder);
   private readonly contactRequestService = inject(ContactRequestService);
   private readonly testimonialsService = inject(TestimonialsService);
-  private readonly destroyRef = inject(DestroyRef);
   private readonly platformId = inject(PLATFORM_ID);
 
   protected readonly contact = CONTACT_CONFIG;
@@ -48,7 +48,10 @@ export class LandingPageComponent {
   protected readonly carouselPageSize = signal(3);
   protected readonly starValues = [1, 2, 3, 4, 5];
   private readonly autoplayMs = 6500;
+  private readonly isBrowser = isPlatformBrowser(this.platformId);
   private autoplayId: ReturnType<typeof setInterval> | null = null;
+  private initialScrollId: ReturnType<typeof setTimeout> | null = null;
+  private carouselReady = false;
   private touchStartX = 0;
 
   protected readonly carouselPages = computed(() => {
@@ -97,16 +100,41 @@ export class LandingPageComponent {
       this.testimonials.set(testimonials);
       this.activeTestimonialIndex.set(0);
       this.startAutoplay();
+      this.scrollCarouselToActive();
     });
 
-    if (isPlatformBrowser(this.platformId)) {
+    if (this.isBrowser) {
       this.updateCarouselPageSize();
-      this.startAutoplay();
       window.addEventListener('resize', this.handleResize, { passive: true });
-      this.destroyRef.onDestroy(() => {
-        this.stopAutoplay();
-        window.removeEventListener('resize', this.handleResize);
-      });
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    this.carouselReady = true;
+
+    // Diferimos el primer scroll hasta que Angular pinte el ViewChild en navegador.
+    this.initialScrollId = setTimeout(() => {
+      this.initialScrollId = null;
+      this.scrollCarouselToActive();
+      this.startAutoplay();
+    });
+  }
+
+  ngOnDestroy(): void {
+    // Los timers/listeners se limpian para evitar callbacks contra DOM destruido.
+    this.stopAutoplay();
+
+    if (this.initialScrollId) {
+      clearTimeout(this.initialScrollId);
+      this.initialScrollId = null;
+    }
+
+    if (this.isBrowser) {
+      window.removeEventListener('resize', this.handleResize);
     }
   }
 
@@ -155,10 +183,18 @@ export class LandingPageComponent {
   }
 
   private readonly handleResize = (): void => {
+    if (!this.isBrowser) {
+      return;
+    }
+
     this.updateCarouselPageSize();
   };
 
   private updateCarouselPageSize(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
     const width = window.innerWidth;
     const pageSize = width < 700 ? 1 : width < 1080 ? 2 : 3;
     this.carouselPageSize.set(pageSize);
@@ -169,25 +205,39 @@ export class LandingPageComponent {
   }
 
   private scrollCarouselToActive(): void {
-    const viewport = this.testimonialViewport?.nativeElement;
+    if (!this.isBrowser || !this.carouselReady) {
+      return;
+    }
 
-    if (!viewport) {
+    // ViewChild entrega un ElementRef; nativeElement es el HTMLElement real del viewport.
+    const viewport = this.carouselViewport?.nativeElement;
+
+    if (!viewport || typeof viewport.scrollTo !== 'function') {
       return;
     }
 
     // El desplazamiento usa el ancho real del viewport para mantener 3/2/1 tarjetas visibles.
     viewport.scrollTo({
-      left: (viewport.clientWidth / this.carouselPageSize()) * this.activeTestimonialIndex(),
+      left: this.getCarouselOffset(viewport),
       behavior: 'smooth',
     });
   }
 
+  private getCarouselOffset(viewport: HTMLElement): number {
+    return (viewport.clientWidth / this.carouselPageSize()) * this.activeTestimonialIndex();
+  }
+
   private startAutoplay(): void {
-    if (this.autoplayId || this.carouselPages().length <= 1) {
+    if (
+      !this.isBrowser ||
+      !this.carouselReady ||
+      this.autoplayId ||
+      this.carouselPages().length <= 1
+    ) {
       return;
     }
 
-    // Autoplay suave: avance lento y pausado al hover/focus para no distraer al usuario.
+    // Autoplay solo corre en navegador para no programar timers durante SSR.
     this.autoplayId = setInterval(() => {
       this.activeTestimonialIndex.update((index) => (index + 1) % this.carouselPages().length);
       this.scrollCarouselToActive();
@@ -204,6 +254,10 @@ export class LandingPageComponent {
   }
 
   private restartAutoplay(): void {
+    if (!this.isBrowser || !this.carouselReady) {
+      return;
+    }
+
     this.stopAutoplay();
     this.startAutoplay();
   }
