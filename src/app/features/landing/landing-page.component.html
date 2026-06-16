@@ -7,8 +7,15 @@
         alt="HMODevelopers"
       />
     </a>
-    <button class="menu-button" type="button" (click)="toggleMenu()"  [attr.aria-expanded]="isMenuOpen()"  aria-controls="primary-menu"   aria-label="Abrir o cerrar menú de navegación" >
-    <span></span><span></span><span></span>
+    <button
+      class="menu-button"
+      type="button"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="isMenuOpen()"
+      aria-controls="primary-menu"
+      aria-label="Abrir o cerrar menú de navegación"
+    >
+      <span></span><span></span><span></span>
     </button>
     <div id="primary-menu" class="nav-links" [class.open]="isMenuOpen()">
       @for (item of content.navItems; track item.href) {
@@ -246,25 +253,210 @@
     </div>
   </section>
 
-  <section id="contacto" class="section shell">
-    <div class="contact-card">
-      <p class="eyebrow">Contacto</p>
-      <h2>Cuéntanos qué quieres mejorar, construir o automatizar</h2>
-      <p>
-        Llegues con una idea clara o solo con un problema por resolver, podemos ayudarte a
-        convertirlo en una solución tecnológica funcional, moderna y preparada para crecer.
-      </p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" [href]="'mailto:' + contact.email">Solicitar asesoría</a
-        ><a class="btn btn-secondary" [href]="'mailto:' + contact.email">Enviar mensaje</a>
+  <section id="contacto" class="section contact-section">
+    <div class="shell contact-layout">
+      <div class="contact-copy">
+        <p class="eyebrow">Contacto</p>
+        <h2>Hablemos de la solución que tu empresa necesita</h2>
+        <p class="contact-lead">
+          Cuéntanos qué quieres mejorar, construir o automatizar. Revisaremos tu solicitud y te
+          contactaremos para orientarte sobre la mejor forma de convertirla en una solución
+          tecnológica.
+        </p>
+        <p>
+          No necesitas saber qué tecnología usar. Solo comparte tu idea, necesidad o problema;
+          nosotros te ayudamos a encontrar el mejor camino.
+        </p>
+        <ul class="trust-list" aria-label="Puntos de confianza del contacto">
+          <li><span aria-hidden="true">✓</span>Respuesta clara y profesional.</li>
+          <li><span aria-hidden="true">✓</span>Asesoría inicial para entender tu necesidad.</li>
+          <li>
+            <span aria-hidden="true">✓</span>Soluciones a medida, sin obligarte a saber tecnología.
+          </li>
+        </ul>
+        <div class="contact-email-card">
+          <span>Correo de contacto</span>
+          <a [href]="'mailto:' + contact.contactEmail">{{ contact.contactEmail }}</a>
+        </div>
+        <small class="privacy-note">
+          Usaremos tus datos únicamente para responder tu solicitud y dar seguimiento a tu consulta.
+        </small>
       </div>
-      <small>{{ contact.email }}</small>
+
+      <form
+        class="contact-form-card"
+        [formGroup]="contactForm"
+        (ngSubmit)="submitContactForm()"
+        novalidate
+      >
+        <div class="form-heading">
+          <p class="eyebrow">Solicitud inicial</p>
+          <h3>Cuéntanos sobre tu proyecto</h3>
+          <p>Completa el formulario y revisaremos la mejor forma de ayudarte.</p>
+        </div>
+
+        <div class="honeypot" aria-hidden="true">
+          <label for="website">Sitio web</label>
+          <input
+            id="website"
+            type="text"
+            formControlName="website"
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="fullName">Nombre completo <span>*</span></label>
+            <input
+              id="fullName"
+              type="text"
+              formControlName="fullName"
+              autocomplete="name"
+              [attr.aria-invalid]="shouldShowError('fullName')"
+              [attr.aria-describedby]="shouldShowError('fullName') ? 'fullName-error' : null"
+            />
+            @if (shouldShowError('fullName')) {
+              <p class="field-error" id="fullName-error">{{ getErrorMessage('fullName') }}</p>
+            }
+          </div>
+
+          <div class="field">
+            <label for="company">Empresa o negocio</label>
+            <input
+              id="company"
+              type="text"
+              formControlName="company"
+              autocomplete="organization"
+              [attr.aria-invalid]="shouldShowError('company')"
+              [attr.aria-describedby]="shouldShowError('company') ? 'company-error' : null"
+            />
+            @if (shouldShowError('company')) {
+              <p class="field-error" id="company-error">{{ getErrorMessage('company') }}</p>
+            }
+          </div>
+
+          <div class="field">
+            <label for="email">Correo electrónico <span>*</span></label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              autocomplete="email"
+              [attr.aria-invalid]="shouldShowError('email')"
+              [attr.aria-describedby]="shouldShowError('email') ? 'email-error' : null"
+            />
+            @if (shouldShowError('email')) {
+              <p class="field-error" id="email-error">{{ getErrorMessage('email') }}</p>
+            }
+          </div>
+
+          <div class="field">
+            <label for="phone">Teléfono</label>
+            <input
+              id="phone"
+              type="tel"
+              formControlName="phone"
+              autocomplete="tel"
+              [attr.aria-invalid]="shouldShowError('phone')"
+              [attr.aria-describedby]="shouldShowError('phone') ? 'phone-error' : null"
+            />
+            @if (shouldShowError('phone')) {
+              <p class="field-error" id="phone-error">{{ getErrorMessage('phone') }}</p>
+            }
+          </div>
+
+          <div class="field">
+            <label for="needType">¿Qué quieres construir o mejorar? <span>*</span></label>
+            <select
+              id="needType"
+              formControlName="needType"
+              [attr.aria-invalid]="shouldShowError('needType')"
+              [attr.aria-describedby]="shouldShowError('needType') ? 'needType-error' : null"
+            >
+              <option value="" disabled>Selecciona una opción</option>
+              @for (option of contact.needOptions; track option.value) {
+                <option [value]="option.value">{{ option.label }}</option>
+              }
+            </select>
+            @if (shouldShowError('needType')) {
+              <p class="field-error" id="needType-error">{{ getErrorMessage('needType') }}</p>
+            }
+          </div>
+
+          <div class="field">
+            <label for="budgetRange">Presupuesto estimado</label>
+            <select id="budgetRange" formControlName="budgetRange">
+              <option value="">Selecciona una opción</option>
+              @for (option of contact.budgetOptions; track option.value) {
+                <option [value]="option.value">{{ option.label }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="field field-full">
+            <label for="message">Mensaje <span>*</span></label>
+            <textarea
+              id="message"
+              formControlName="message"
+              rows="6"
+              placeholder="Ejemplo: quiero crear una plataforma para mi empresa, automatizar un proceso, mejorar un sistema existente o recibir orientación sobre una idea."
+              [attr.aria-invalid]="shouldShowError('message')"
+              [attr.aria-describedby]="shouldShowError('message') ? 'message-error' : null"
+            ></textarea>
+            @if (shouldShowError('message')) {
+              <p class="field-error" id="message-error">{{ getErrorMessage('message') }}</p>
+            }
+          </div>
+        </div>
+
+        <div class="privacy-field">
+          <input
+            id="privacyAccepted"
+            type="checkbox"
+            formControlName="privacyAccepted"
+            [attr.aria-invalid]="shouldShowError('privacyAccepted')"
+            [attr.aria-describedby]="
+              shouldShowError('privacyAccepted') ? 'privacyAccepted-error' : null
+            "
+          />
+          <label for="privacyAccepted"
+            >Acepto que HMODevelopers use esta información para responder mi solicitud de contacto.
+            <span>*</span></label
+          >
+        </div>
+        @if (shouldShowError('privacyAccepted')) {
+          <p class="field-error privacy-error" id="privacyAccepted-error">
+            {{ getErrorMessage('privacyAccepted') }}
+          </p>
+        }
+
+        @if (formMessage()) {
+          <div
+            class="form-alert"
+            [class.success]="formStatus() === 'success'"
+            [class.error]="formStatus() === 'error'"
+            role="status"
+            aria-live="polite"
+          >
+            {{ formMessage() }}
+          </div>
+        }
+
+        <button class="btn btn-primary submit-button" type="submit" [disabled]="isSubmitting()">
+          @if (isSubmitting()) {
+            <span class="button-loader" aria-hidden="true"></span> Enviando solicitud...
+          } @else {
+            Enviar solicitud
+          }
+        </button>
+      </form>
     </div>
   </section>
 </main>
 
 <footer class="footer">
-  
   <div class="shell footer-grid">
     <div>
       <h3>HMODevelopers</h3>
