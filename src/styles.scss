@@ -1,1 +1,21 @@
-html{scroll-behavior:smooth}body{margin:0;background:#fff}*,*::before,*::after{box-sizing:border-box}:focus-visible{outline:3px solid rgba(37,99,235,.45);outline-offset:3px}button,a{font:inherit}button{cursor:pointer}
+:root {
+  --brand-black: #111315;
+  --brand-dark: #1f2328;
+  --brand-graphite: #2b3035;
+  --brand-gray: #3f454b;
+  --brand-muted: #6b7280;
+  --brand-border: #dfe3e6;
+  --brand-surface: #ffffff;
+  --brand-surface-soft: #f5f6f7;
+  --brand-surface-muted: #fafafa;
+  --brand-green: #1f9d55;
+  --brand-green-dark: #157a42;
+  --brand-green-soft: #e9f8ef;
+}
+
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--brand-surface); }
+*, *::before, *::after { box-sizing: border-box; }
+:focus-visible { outline: 3px solid rgba(31,157,85,.42); outline-offset: 3px; }
+button, a { font: inherit; }
+button { cursor: pointer; }

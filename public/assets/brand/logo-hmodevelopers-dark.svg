@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1460 210" role="img" aria-labelledby="title">
+  <title id="title">HMODevelopers</title>
+  <g fill="none" fill-rule="evenodd">
+    <text x="0" y="158" fill="#F5F6F7" font-family="Orbitron, Eurostile, Rajdhani, Montserrat, Arial, sans-serif" font-size="166" font-weight="800" letter-spacing="-8">HMO</text>
+    <polygon points="132,15 166,15 166,104 132,70" fill="#1F9D55"/>
+    <path d="M440 107a73 73 0 0 1-74 71" stroke="#1F9D55" stroke-width="34" stroke-linecap="butt"/>
+    <text x="555" y="158" fill="none" stroke="#F5F6F7" stroke-width="7" stroke-linejoin="round" font-family="Orbitron, Eurostile, Rajdhani, Montserrat, Arial, sans-serif" font-size="134" font-weight="300" letter-spacing="-10">Developers</text>
+    <polygon points="823,68 845,68 805,158 783,158" fill="#1F9D55"/>
+  </g>
+</svg>

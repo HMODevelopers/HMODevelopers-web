@@ -1,7 +1,7 @@
 <header class="site-header">
   <nav class="shell nav" aria-label="Navegación principal">
-    <a class="brand" href="#inicio" (click)="closeMenu()" aria-label="Ir al inicio de HMODevelopers">
-      <span class="brand-mark">H</span><span>{{ contact.companyName }}</span>
+    <a class="brand" href="#inicio" (click)="closeMenu()" aria-label="Ir al inicio">
+      <img class="brand-logo" src="/assets/brand/logo-hmodevelopers.svg" alt="HMODevelopers" />
     </a>
     <button class="menu-button" type="button" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen()" aria-controls="primary-menu" aria-label="Abrir o cerrar menú de navegación">
       <span></span><span></span><span></span>
@@ -16,10 +16,11 @@
 <main id="inicio">
   <section class="hero shell section">
     <div class="hero-copy">
+      <img class="hero-mark" src="/assets/brand/logo-hmodevelopers-mark.svg" alt="HMODevelopers" />
       <p class="eyebrow">Soluciones tecnológicas para empresas que quieren avanzar</p>
       <h1>Soluciones tecnológicas para llevar tu empresa al siguiente nivel</h1>
       <p class="hero-lead">En HMODevelopers convertimos ideas, procesos y necesidades de negocio en herramientas digitales: páginas web, sistemas, aplicaciones, automatizaciones, bots, integraciones, dashboards y soluciones a medida.</p>
-      <p class="hero-support">No necesitas saber qué tecnología usar. Nosotros entendemos tu necesidad, analizamos tu operación y construimos una solución profesional, moderna y preparada para crecer.</p>
+      <p class="hero-support">Tú nos cuentas qué quieres mejorar, construir o automatizar; nosotros lo convertimos en una solución tecnológica profesional, moderna y preparada para crecer.</p>
       <div class="hero-actions"><a class="btn btn-primary" href="#contacto">Solicitar asesoría</a><a class="btn btn-secondary" href="#soluciones">Ver soluciones</a></div>
       <div class="badges" aria-label="Capacidades destacadas">@for (badge of content.badges; track badge) { <span>{{ badge }}</span> }</div>
     </div>
@@ -63,4 +64,4 @@
   <section id="contacto" class="section shell"><div class="contact-card"><p class="eyebrow">Contacto</p><h2>Cuéntanos qué quieres mejorar, construir o automatizar</h2><p>No importa si tienes una idea clara o apenas estás detectando un problema. En HMODevelopers podemos ayudarte a convertir esa necesidad en una solución tecnológica funcional, moderna y preparada para crecer.</p><div class="hero-actions"><a class="btn btn-primary" [href]="contact.whatsappHref">Solicitar asesoría</a><a class="btn btn-secondary" [href]="'mailto:' + contact.email">Enviar mensaje</a></div><small>{{ contact.whatsappLabel }} · {{ contact.email }}</small></div></section>
 </main>
 
-<footer class="footer"><div class="shell footer-grid"><div><a class="brand" href="#inicio"><span class="brand-mark">H</span><span>HMODevelopers</span></a><p>Soluciones tecnológicas para empresas, negocios e ideas que necesitan convertirse en herramientas digitales.</p></div><div><h3>Links rápidos</h3>@for (item of content.navItems; track item.href) { <a [href]="item.href">{{ item.label }}</a> }</div><div><h3>Soluciones</h3>@for (solution of content.solutions.slice(0, 6); track solution) { <a href="#soluciones">{{ solution }}</a> }</div><div><h3>Contacto</h3><a [href]="'mailto:' + contact.email">{{ contact.email }}</a><a href="#contacto">Solicitar asesoría</a></div></div><div class="shell copyright">© 2026 HMODevelopers. Todos los derechos reservados.</div></footer>
+<footer class="footer"><div class="shell footer-grid"><div><a class="brand" href="#inicio" aria-label="Ir al inicio"><img class="brand-logo brand-logo-dark" src="/assets/brand/logo-hmodevelopers-dark.svg" alt="HMODevelopers" /></a><p>Soluciones tecnológicas para empresas, negocios e ideas que necesitan convertirse en herramientas digitales.</p></div><div><h3>Links rápidos</h3>@for (item of content.navItems; track item.href) { <a [href]="item.href">{{ item.label }}</a> }</div><div><h3>Soluciones</h3>@for (solution of content.solutions.slice(0, 6); track solution) { <a href="#soluciones">{{ solution }}</a> }</div><div><h3>Contacto</h3><a [href]="'mailto:' + contact.email">{{ contact.email }}</a><a href="#contacto">Solicitar asesoría</a></div></div><div class="shell copyright">© 2026 HMODevelopers. Todos los derechos reservados.</div></footer>
