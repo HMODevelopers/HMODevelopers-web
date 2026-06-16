@@ -1,0 +1,48 @@
+<header class="site-header">
+  <nav class="nav shell" aria-label="Navegación principal">
+    <a class="brand" href="#inicio" (click)="closeMenu()" aria-label="HMODevelopers inicio"><span class="brand-mark">H</span><span>HMODevelopers</span></a>
+    <button class="menu-button" type="button" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen()" aria-controls="primary-menu" aria-label="Abrir menú de navegación">
+      <span></span><span></span><span></span>
+    </button>
+    <div id="primary-menu" class="nav-links" [class.open]="isMenuOpen()">
+      @for (item of navItems; track item.href) { <a [href]="item.href" (click)="closeMenu()">{{ item.label }}</a> }
+      <a class="btn btn-primary" href="#contacto" (click)="closeMenu()">Cotizar proyecto</a>
+    </div>
+  </nav>
+</header>
+
+<main id="inicio">
+  <section class="hero shell section">
+    <div class="hero-copy reveal">
+      <p class="eyebrow">Software empresarial · Web · Mobile · Backend</p>
+      <h1>Software a medida para negocios que quieren crecer</h1>
+      <p class="hero-text">En HMODevelopers diseñamos y construimos plataformas web, aplicaciones móviles, APIs, automatizaciones e infraestructura digital para empresas que necesitan soluciones reales, escalables y bien hechas.</p>
+      <div class="hero-actions"><a class="btn btn-primary" href="#contacto">Solicitar cotización</a><a class="btn btn-secondary" href="#servicios">Ver servicios</a></div>
+      <div class="badges" aria-label="Especialidades">@for (badge of badges; track badge) { <span>{{ badge }}</span> }</div>
+    </div>
+    <div class="tech-panel reveal" aria-label="Arquitectura tecnológica representativa">
+      <div class="panel-top"><span></span><span></span><span></span><strong>HMO architecture</strong></div>
+      <div class="architecture-grid">
+        <article><small>Frontend</small><b>Angular SSR</b></article><article><small>Backend</small><b>APIs seguras</b></article><article><small>Data</small><b>SQL / Reports</b></article><article><small>Cloud</small><b>Deploy & Monitor</b></article>
+      </div>
+      <div class="console"><span>$ build --production</span><span>✓ responsive UI</span><span>✓ scalable backend</span><span>✓ secure deployment</span></div>
+      <div class="floating-card one">99ms API mock</div><div class="floating-card two">Secure access</div>
+    </div>
+  </section>
+
+  <section class="metrics shell" aria-label="Indicadores de confianza">@for (metric of metrics; track metric) { <article><span>●</span><strong>{{ metric }}</strong></article> }</section>
+
+  <section id="servicios" class="section shell"><div class="section-heading"><p class="eyebrow">Servicios</p><h2>Capacidades técnicas para construir soluciones completas</h2><p>Desde la interfaz hasta la infraestructura, organizamos cada pieza para entregar software confiable y mantenible.</p></div><div class="card-grid">@for (service of services; track service.title) { <article class="premium-card"><span class="icon">{{ service.icon }}</span><h3>{{ service.title }}</h3><p>{{ service.description }}</p></article> }</div></section>
+
+  <section id="soluciones" class="section section-tint"><div class="shell"><div class="section-heading"><p class="eyebrow">Soluciones</p><h2>Productos digitales orientados a operación real</h2><p>Diseñamos plataformas que centralizan información, reducen tareas manuales y ordenan procesos críticos.</p></div><div class="solution-grid">@for (solution of solutions; track solution.title) { <article><span>0{{ $index + 1 }}</span><h3>{{ solution.title }}</h3><p>{{ solution.description }}</p></article> }</div><div class="inline-cta">¿Tienes una idea parecida? <a href="#contacto">Podemos construirla.</a></div></div></section>
+
+  <section id="proceso" class="section shell"><div class="section-heading"><p class="eyebrow">Proceso</p><h2>Una forma de trabajo clara, técnica y colaborativa</h2></div><div class="timeline">@for (step of process; track step[0]) { <article><span>{{ $index + 1 }}</span><h3>{{ step[0] }}</h3><p>{{ step[1] }}</p></article> }</div></section>
+
+  <section id="recomendaciones" class="section section-tint"><div class="shell testimonials"><div class="section-heading"><p class="eyebrow">Recomendaciones</p><h2>Opiniones reservadas para testimonios reales</h2><p>Esta sección queda preparada para publicar recomendaciones verificadas sin inventar clientes ni cargos.</p></div><div class="testimonial-card" role="region" aria-live="polite"><span class="quote">“</span><p>{{ testimonials[testimonialIndex()] }}</p><strong>Cliente por confirmar</strong><small>Testimonio pendiente de publicación</small></div><div class="carousel-controls"><button type="button" (click)="prevTestimonial()" aria-label="Testimonio anterior">←</button>@for (item of testimonials; track $index) { <button type="button" class="dot" [class.active]="$index === testimonialIndex()" (click)="setTestimonial($index)" [attr.aria-label]="'Ver testimonio ' + ($index + 1)"></button> }<button type="button" (click)="nextTestimonial()" aria-label="Testimonio siguiente">→</button></div></div></section>
+
+  <section class="section shell why"><div class="why-copy"><p class="eyebrow">Por qué HMODevelopers</p><h2>Base profesional para crecer sin rehacer todo desde cero</h2><p>Cuidamos arquitectura, experiencia de usuario, mantenimiento, despliegue y comunicación técnica para que tu solución sea útil hoy y escalable mañana.</p></div><div class="why-grid">@for (item of differentiators; track item.title) { <article><span class="icon">{{ item.icon }}</span><h3>{{ item.title }}</h3><p>{{ item.description }}</p></article> }</div></section>
+
+  <section id="contacto" class="section shell"><div class="contact-card"><p class="eyebrow">Contacto</p><h2>Cuéntanos tu idea y la convertimos en una solución digital</h2><p>Ya sea que necesites una plataforma web, una app, una API, automatizar procesos o desplegar tu infraestructura, en HMODevelopers podemos ayudarte a construirlo con una base profesional.</p><div class="hero-actions"><a class="btn btn-primary" [href]="contact.whatsappHref" aria-label="Contactar por WhatsApp">Contactar por WhatsApp</a><a class="btn btn-secondary" [href]="'mailto:' + contact.email">Enviar correo</a></div><small>WhatsApp pendiente de configurar · {{ contact.email }}</small></div></section>
+</main>
+
+<footer class="footer"><div class="shell footer-grid"><div><a class="brand" href="#inicio"><span class="brand-mark">H</span><span>HMODevelopers</span></a><p>Desarrollo de software a medida, plataformas empresariales, automatización e infraestructura para negocios reales.</p></div><div><h3>Links rápidos</h3>@for (item of navItems; track item.href) { <a [href]="item.href">{{ item.label }}</a> }</div><div><h3>Servicios</h3>@for (service of services.slice(0, 4); track service.title) { <a href="#servicios">{{ service.title }}</a> }</div><div><h3>Contacto</h3><a [href]="'mailto:' + contact.email">{{ contact.email }}</a><a href="#contacto">Cotizar proyecto</a></div></div><div class="shell copyright">© 2026 HMODevelopers. Todos los derechos reservados.</div></footer>
