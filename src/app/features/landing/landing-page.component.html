@@ -7,15 +7,8 @@
         alt="HMODevelopers"
       />
     </a>
-    <button
-      class="menu-button"
-      type="button"
-      (click)="toggleMenu()"
-      [attr.aria-expanded]="isMenuOpen()"
-      aria-controls="primary-menu"
-      aria-label="Abrir o cerrar menú de navegación"
-    >
-      <span></span><span></span><span></span>
+    <button class="menu-button" type="button" (click)="toggleMenu()"  [attr.aria-expanded]="isMenuOpen()"  aria-controls="primary-menu"   aria-label="Abrir o cerrar menú de navegación" >
+    <span></span><span></span><span></span>
     </button>
     <div id="primary-menu" class="nav-links" [class.open]="isMenuOpen()">
       @for (item of content.navItems; track item.href) {
@@ -31,20 +24,20 @@
 <main id="inicio">
   <section class="hero shell section">
     <div class="hero-copy">
-      <p class="eyebrow">Soluciones tecnológicas para empresas que quieren avanzar</p>
-      <h1>Soluciones tecnológicas para llevar tu empresa al siguiente nivel</h1>
+      <p class="eyebrow">Tecnología para empresas que quieren avanzar</p>
+      <h1>Convierte tus ideas y procesos en soluciones digitales reales</h1>
       <p class="hero-lead">
-        En HMODevelopers convertimos ideas, procesos y necesidades de negocio en herramientas
-        digitales: páginas web, sistemas, aplicaciones, automatizaciones, bots, integraciones,
-        dashboards y soluciones a medida.
+        En HMODevelopers te ayudamos a transformar necesidades de negocio en páginas, sistemas,
+        apps, automatizaciones, bots, integraciones, dashboards y soluciones a medida.
       </p>
       <p class="hero-support">
-        Tú nos cuentas qué quieres mejorar, construir o automatizar; nosotros lo convertimos en una
-        solución tecnológica profesional, moderna y preparada para crecer.
+        No necesitas saber qué tecnología usar. Tú nos cuentas qué quieres mejorar, construir o
+        automatizar; nosotros lo convertimos en una solución tecnológica profesional, moderna y
+        preparada para crecer.
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#contacto">Solicitar asesoría</a
-        ><a class="btn btn-secondary" href="#soluciones">Ver soluciones</a>
+        ><a class="btn btn-secondary" href="#soluciones">Explorar soluciones</a>
       </div>
       <div class="badges" aria-label="Capacidades destacadas">
         @for (badge of content.badges; track badge) {
@@ -52,16 +45,27 @@
         }
       </div>
     </div>
-    <div class="solution-visual" aria-label="Representación visual de flujos tecnológicos">
-      <div class="visual-grid"><span></span><span></span><span></span><span></span></div>
-      <div class="visual-node main">Idea</div>
-      <div class="visual-node right">Solución</div>
-      <div class="visual-node lower">Resultado</div>
-      <div class="flow-card top"><small>Estado</small><strong>Conectado</strong></div>
-      <div class="flow-card mid"><small>Proceso</small><strong>Automatizado</strong></div>
-      <div class="flow-card bottom"><small>Información</small><strong>Analizada</strong></div>
-      <div class="pipeline">
-        <span>Sistema</span><span>Datos</span><span>Integración</span><span>Publicado</span>
+    <div class="solution-visual" aria-label="Flujo visual de solución tecnológica">
+      <div class="orbit orbit-one"></div>
+      <div class="orbit orbit-two"></div>
+      <div class="visual-panel diagnostic">
+        <small>01 Diagnóstico</small><strong>Necesidad de negocio</strong
+        ><span>Escuchamos y ordenamos prioridades</span>
+      </div>
+      <div class="visual-panel strategy">
+        <small>02 Estrategia</small><strong>Ruta tecnológica</strong
+        ><span>Definimos alcance, experiencia e integración</span>
+      </div>
+      <div class="visual-panel build">
+        <small>03 Solución</small><strong>Implementación lista</strong
+        ><span>Construida para operar y crecer</span>
+      </div>
+      <div class="node node-a">WEB</div>
+      <div class="node node-b">API</div>
+      <div class="node node-c">BI</div>
+      <div class="node node-d">BOT</div>
+      <div class="value-flow">
+        <span>Necesidad</span><span>Estrategia</span><span>Solución</span><span>Crecimiento</span>
       </div>
     </div>
   </section>
@@ -70,14 +74,14 @@
     <div class="section-heading">
       <p class="eyebrow">¿Qué podemos resolver?</p>
       <h2>
-        Si tienes una idea, un proceso o un problema, podemos ayudarte a convertirlo en tecnología
+        Llegas con una necesidad; nosotros te ayudamos a encontrar el mejor camino con tecnología
       </h2>
       <p>
-        Analizamos lo que necesitas y proponemos una solución digital clara, útil y alineada con tu
-        empresa.
+        Analizamos lo que quieres mejorar y lo convertimos en una solución clara, útil y alineada
+        con tu empresa.
       </p>
     </div>
-    <div class="card-grid">
+    <div class="card-grid needs-grid">
       @for (item of content.needs; track item.title) {
         <article class="premium-card">
           <span class="icon">{{ item.icon }}</span>
@@ -90,20 +94,24 @@
 
   <section class="section section-tint">
     <div class="shell">
-      <div class="section-heading">
-        <p class="eyebrow">Capacidades tecnológicas</p>
-        <h2>Capacidades para construir la solución que tu empresa necesita</h2>
+      <div class="section-heading split-heading">
+        <div>
+          <p class="eyebrow">Capacidades tecnológicas</p>
+          <h2>Construimos con visión completa, no con soluciones improvisadas</h2>
+        </div>
         <p>
-          No todos los proyectos requieren lo mismo. Por eso combinamos estrategia, diseño,
-          desarrollo, automatización, datos e infraestructura para crear soluciones completas.
+          Combinamos estrategia, diseño, desarrollo, automatización, datos e infraestructura para
+          crear soluciones que realmente encajen con tu operación.
         </p>
       </div>
-      <div class="card-grid">
+      <div class="capability-grid">
         @for (item of content.capabilities; track item.title) {
-          <article class="premium-card">
-            <span class="icon">{{ item.icon }}</span>
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.description }}</p>
+          <article>
+            <span>{{ item.icon }}</span>
+            <div>
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.description }}</p>
+            </div>
           </article>
         }
       </div>
@@ -111,15 +119,14 @@
   </section>
 
   <section id="tecnologia" class="section shell trust-section">
-    <div>
+    <div class="trust-copy">
       <p class="eyebrow">Base profesional</p>
       <h2>Tecnología moderna, soluciones bien construidas</h2>
       <p>
-        No se trata solo de crear una página, un sistema o una automatización. Se trata de construir
-        una solución confiable, segura y preparada para crecer. En HMODevelopers usamos herramientas
-        actuales y buenas prácticas profesionales para que tu proyecto tenga una base sólida desde
-        el inicio.
+        No se trata solo de entregar una herramienta. Se trata de crear una base confiable, segura y
+        fácil de usar para que tu empresa pueda operar hoy y crecer mañana.
       </p>
+      <a class="text-link" href="#proceso">Conoce cómo trabajamos</a>
     </div>
     <div class="trust-grid">
       @for (item of content.trustPoints; track item.title) {
@@ -133,13 +140,13 @@
   </section>
 
   <section id="soluciones" class="section section-dark">
-    <div class="shell">
+    <div class="shell dark-inner">
       <div class="section-heading">
         <p class="eyebrow">Soluciones que podemos crear</p>
-        <h2>Desde una página sencilla hasta una plataforma completa</h2>
+        <h2>Desde una landing puntual hasta una plataforma completa</h2>
         <p>
-          Cada empresa tiene necesidades distintas. Podemos ayudarte a construir la solución
-          adecuada para el momento en el que se encuentra tu negocio.
+          Cada empresa necesita una ruta distinta. Podemos iniciar pequeño, modernizar lo existente
+          o construir una solución a medida desde cero.
         </p>
       </div>
       <div class="solution-list">
@@ -156,17 +163,17 @@
   <section class="section shell before-after">
     <div class="section-heading">
       <p class="eyebrow">Antes y después</p>
-      <h2>De ideas y procesos dispersos a soluciones digitales claras</h2>
+      <h2>De procesos dispersos a una operación digital más clara</h2>
     </div>
     <div class="compare-grid">
       <article>
-        <h3>Antes</h3>
+        <div class="compare-label">Antes</div>
         @for (item of content.before; track item) {
           <p><span>—</span>{{ item }}</p>
         }
       </article>
       <article class="after">
-        <h3>Después</h3>
+        <div class="compare-label">Después</div>
         @for (item of content.after; track item) {
           <p><span>✓</span>{{ item }}</p>
         }
@@ -178,7 +185,7 @@
     <div class="shell">
       <div class="section-heading">
         <p class="eyebrow">Cómo trabajamos</p>
-        <h2>Te acompañamos desde la idea hasta la implementación</h2>
+        <h2>Un proceso claro desde la idea hasta la implementación</h2>
       </div>
       <div class="timeline">
         @for (step of content.process; track step.title) {
@@ -192,10 +199,10 @@
     </div>
   </section>
 
-  <section class="section shell">
+  <section class="section shell use-cases">
     <div class="section-heading">
       <p class="eyebrow">Ideas de solución</p>
-      <h2>Ideas de lo que podemos construir contigo</h2>
+      <h2>Ejemplos amplios, pensados para distintas necesidades</h2>
     </div>
     <div class="use-case-grid">
       @for (item of content.useCases; track item.title) {
@@ -207,43 +214,17 @@
     </div>
   </section>
 
-  <section class="section section-tint recommendations">
-    <div class="shell">
-      <div class="section-heading">
-        <p class="eyebrow">Recomendaciones</p>
-        <h2>Espacio preparado para experiencias reales</h2>
-        <p>
-          Usamos un carrusel accesible con controles propios y CSS scroll-snap como alternativa
-          profesional, porque la instalación de Embla no estuvo disponible en el registro npm del
-          entorno.
-        </p>
+  <section class="section trust-note">
+    <div class="shell trust-note-card">
+      <div>
+        <p class="eyebrow">Confianza</p>
+        <h2>Construyendo relaciones de confianza</h2>
       </div>
-      <div class="testimonial-card" role="region" aria-live="polite">
-        <span class="quote">“</span>
-        <p>{{ currentRecommendation() }}</p>
-        <strong>Cliente por confirmar</strong><small>Testimonio pendiente de publicación</small>
-      </div>
-      <div class="carousel-controls">
-        <button
-          type="button"
-          (click)="previousRecommendation()"
-          aria-label="Recomendación anterior"
-        >
-          ←
-        </button>
-        @for (item of content.recommendations; track $index) {
-          <button
-            type="button"
-            class="dot"
-            [class.active]="$index === recommendationIndex()"
-            (click)="setRecommendation($index)"
-            [attr.aria-label]="'Ver recomendación ' + ($index + 1)"
-          ></button>
-        }
-        <button type="button" (click)="nextRecommendation()" aria-label="Recomendación siguiente">
-          →
-        </button>
-      </div>
+      <p>
+        Cada proyecto inicia con entender bien la necesidad. Conforme avancemos con nuevos clientes,
+        aquí compartiremos experiencias y resultados reales, sin inventar testimonios ni mostrar
+        contenido provisional.
+      </p>
     </div>
   </section>
 
@@ -255,7 +236,10 @@
     <div class="faq-list">
       @for (faq of content.faqs; track faq.question) {
         <details>
-          <summary>{{ faq.question }}</summary>
+          <summary>
+            <span>{{ faq.question }}</span
+            ><span class="faq-icon">+</span>
+          </summary>
           <p>{{ faq.answer }}</p>
         </details>
       }
@@ -267,32 +251,26 @@
       <p class="eyebrow">Contacto</p>
       <h2>Cuéntanos qué quieres mejorar, construir o automatizar</h2>
       <p>
-        No importa si tienes una idea clara o apenas estás detectando un problema. En HMODevelopers
-        podemos ayudarte a convertir esa necesidad en una solución tecnológica funcional, moderna y
-        preparada para crecer.
+        Llegues con una idea clara o solo con un problema por resolver, podemos ayudarte a
+        convertirlo en una solución tecnológica funcional, moderna y preparada para crecer.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary" [href]="contact.whatsappHref">Solicitar asesoría</a
+        <a class="btn btn-primary" [href]="'mailto:' + contact.email">Solicitar asesoría</a
         ><a class="btn btn-secondary" [href]="'mailto:' + contact.email">Enviar mensaje</a>
       </div>
-      <small>{{ contact.whatsappLabel }} · {{ contact.email }}</small>
+      <small>{{ contact.email }}</small>
     </div>
   </section>
 </main>
 
 <footer class="footer">
+  
   <div class="shell footer-grid">
     <div>
-      <a class="brand footer-brand" href="#inicio" aria-label="Ir al inicio"
-        ><span class="footer-logo-card"
-          ><img
-            class="brand-logo footer-logo"
-            src="/assets/brand/logo-hmodevelopers-transparent.png"
-            alt="HMODevelopers" /></span
-      ></a>
+      <h3>HMODevelopers</h3>
       <p>
-        Soluciones tecnológicas para empresas, negocios e ideas que necesitan convertirse en
-        herramientas digitales.
+        Ayudamos a empresas, negocios, emprendedores e instituciones a convertir necesidades reales
+        en soluciones digitales profesionales.
       </p>
     </div>
     <div>
