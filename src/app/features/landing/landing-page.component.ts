@@ -1,14 +1,23 @@
-import { Component, inject, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import {
+  Component,
+  DestroyRef,
+  ElementRef,
+  PLATFORM_ID,
+  ViewChild,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { finalize } from 'rxjs';
 import { CONTACT_CONFIG } from '../../core/config/contact.config';
 import { LANDING_CONTENT } from '../../core/config/landing-content.config';
-import {
-  ContactNeedType,
-  ContactRequestPayload,
-} from '../../core/models/contact-request.model';
+import { ContactNeedType, ContactRequestPayload } from '../../core/models/contact-request.model';
 import { ContactRequestService } from '../../core/services/contact-request.service';
+import { TestimonialsService } from './services/testimonials.service';
+import { Testimonial } from './models/testimonial.model';
 
 @Component({
   selector: 'app-landing-page',
@@ -17,10 +26,15 @@ import { ContactRequestService } from '../../core/services/contact-request.servi
   styleUrl: './landing-page.component.scss',
 })
 export class LandingPageComponent {
+  @ViewChild('testimonialViewport') private testimonialViewport?: ElementRef<HTMLElement>;
+
   private readonly title = inject(Title);
   private readonly meta = inject(Meta);
   private readonly formBuilder = inject(FormBuilder);
   private readonly contactRequestService = inject(ContactRequestService);
+  private readonly testimonialsService = inject(TestimonialsService);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly platformId = inject(PLATFORM_ID);
 
   protected readonly contact = CONTACT_CONFIG;
   protected readonly content = LANDING_CONTENT;
@@ -29,12 +43,29 @@ export class LandingPageComponent {
   protected readonly submitted = signal(false);
   protected readonly formStatus = signal<'idle' | 'success' | 'error'>('idle');
   protected readonly formMessage = signal('');
+  protected readonly testimonials = signal<Testimonial[]>([]);
+  protected readonly activeTestimonialIndex = signal(0);
+  protected readonly carouselPageSize = signal(3);
+  protected readonly starValues = [1, 2, 3, 4, 5];
+  private readonly autoplayMs = 6500;
+  private autoplayId: ReturnType<typeof setInterval> | null = null;
+  private touchStartX = 0;
+
+  protected readonly carouselPages = computed(() => {
+    const total = this.testimonials().length;
+    const pageSize = this.carouselPageSize();
+    const pages = Math.max(1, total - pageSize + 1);
+    return Array.from({ length: pages }, (_, index) => index);
+  });
 
   protected readonly contactForm = this.formBuilder.nonNullable.group({
     fullName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(120)]],
-    company: ['', [Validators.required,Validators.maxLength(150)]],
+    company: ['', [Validators.required, Validators.maxLength(150)]],
     email: ['', [Validators.required, Validators.email, Validators.maxLength(180)]],
-    phone: ['', [Validators.required, Validators.maxLength(30), Validators.pattern(/^[0-9+\-()\s]*$/)]],
+    phone: [
+      '',
+      [Validators.required, Validators.maxLength(30), Validators.pattern(/^[0-9+\-()\s]*$/)],
+    ],
     needType: ['', [Validators.required]],
     message: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(1500)]],
     privacyAccepted: [false, [Validators.requiredTrue]],
@@ -60,6 +91,121 @@ export class LandingPageComponent {
     });
     this.meta.updateTag({ property: 'og:type', content: 'website' });
     this.meta.updateTag({ property: 'og:locale', content: 'es_DO' });
+
+    // La sección consume un servicio para poder sustituir mocks por backend sin rehacer la UI.
+    this.testimonialsService.getTestimonials().subscribe((testimonials) => {
+      this.testimonials.set(testimonials);
+      this.activeTestimonialIndex.set(0);
+      this.startAutoplay();
+    });
+
+    if (isPlatformBrowser(this.platformId)) {
+      this.updateCarouselPageSize();
+      this.startAutoplay();
+      window.addEventListener('resize', this.handleResize, { passive: true });
+      this.destroyRef.onDestroy(() => {
+        this.stopAutoplay();
+        window.removeEventListener('resize', this.handleResize);
+      });
+    }
+  }
+
+  protected goToPreviousTestimonial(): void {
+    this.goToTestimonial(this.activeTestimonialIndex() - 1);
+  }
+
+  protected goToNextTestimonial(): void {
+    this.goToTestimonial(this.activeTestimonialIndex() + 1);
+  }
+
+  protected goToTestimonial(index: number): void {
+    const pages = this.carouselPages().length;
+    const nextIndex = (index + pages) % pages;
+    this.activeTestimonialIndex.set(nextIndex);
+    this.scrollCarouselToActive();
+    this.restartAutoplay();
+  }
+
+  protected pauseAutoplay(): void {
+    this.stopAutoplay();
+  }
+
+  protected resumeAutoplay(): void {
+    this.startAutoplay();
+  }
+
+  protected onTouchStart(event: TouchEvent): void {
+    this.touchStartX = event.changedTouches[0]?.clientX ?? 0;
+  }
+
+  protected onTouchEnd(event: TouchEvent): void {
+    const touchEndX = event.changedTouches[0]?.clientX ?? 0;
+    const distance = this.touchStartX - touchEndX;
+
+    // Swipe horizontal mínimo para evitar navegación accidental durante scroll vertical.
+    if (Math.abs(distance) < 42) {
+      return;
+    }
+
+    distance > 0 ? this.goToNextTestimonial() : this.goToPreviousTestimonial();
+  }
+
+  protected trackTestimonialById(_: number, testimonial: Testimonial): number {
+    return testimonial.id;
+  }
+
+  private readonly handleResize = (): void => {
+    this.updateCarouselPageSize();
+  };
+
+  private updateCarouselPageSize(): void {
+    const width = window.innerWidth;
+    const pageSize = width < 700 ? 1 : width < 1080 ? 2 : 3;
+    this.carouselPageSize.set(pageSize);
+    this.activeTestimonialIndex.set(
+      Math.min(this.activeTestimonialIndex(), this.carouselPages().length - 1),
+    );
+    this.scrollCarouselToActive();
+  }
+
+  private scrollCarouselToActive(): void {
+    const viewport = this.testimonialViewport?.nativeElement;
+
+    if (!viewport) {
+      return;
+    }
+
+    // El desplazamiento usa el ancho real del viewport para mantener 3/2/1 tarjetas visibles.
+    viewport.scrollTo({
+      left: (viewport.clientWidth / this.carouselPageSize()) * this.activeTestimonialIndex(),
+      behavior: 'smooth',
+    });
+  }
+
+  private startAutoplay(): void {
+    if (this.autoplayId || this.carouselPages().length <= 1) {
+      return;
+    }
+
+    // Autoplay suave: avance lento y pausado al hover/focus para no distraer al usuario.
+    this.autoplayId = setInterval(() => {
+      this.activeTestimonialIndex.update((index) => (index + 1) % this.carouselPages().length);
+      this.scrollCarouselToActive();
+    }, this.autoplayMs);
+  }
+
+  private stopAutoplay(): void {
+    if (!this.autoplayId) {
+      return;
+    }
+
+    clearInterval(this.autoplayId);
+    this.autoplayId = null;
+  }
+
+  private restartAutoplay(): void {
+    this.stopAutoplay();
+    this.startAutoplay();
   }
 
   protected toggleMenu(): void {

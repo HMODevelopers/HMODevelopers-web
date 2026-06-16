@@ -221,17 +221,98 @@
     </div>
   </section>
 
-  <section class="section trust-note">
-    <div class="shell trust-note-card">
-      <div>
-        <p class="eyebrow">Confianza</p>
-        <h2>Construyendo relaciones de confianza</h2>
+  <section
+    class="section testimonials-section"
+    aria-labelledby="testimonials-title"
+    (mouseenter)="pauseAutoplay()"
+    (mouseleave)="resumeAutoplay()"
+    (focusin)="pauseAutoplay()"
+    (focusout)="resumeAutoplay()"
+  >
+    <div class="shell testimonials-shell">
+      <div class="section-heading testimonials-heading">
+        <p class="eyebrow">Testimonios</p>
+        <h2 id="testimonials-title">Confianza que se construye proyecto a proyecto</h2>
+        <p>
+          Aunque cada colaboración es distinta, nuestra forma de trabajar se basa en comunicación
+          clara, soluciones funcionales y compromiso con los resultados.
+        </p>
+        <!-- Texto demostrativo fácil de ocultar cuando existan testimonios reales. -->
+        <small class="demo-disclaimer">
+          Contenido demostrativo preparado para futura integración con clientes reales.
+        </small>
       </div>
-      <p>
-        Cada proyecto inicia con entender bien la necesidad. Conforme avancemos con nuevos clientes,
-        aquí compartiremos experiencias y resultados reales, sin inventar testimonios ni mostrar
-        contenido provisional.
-      </p>
+
+      <div class="testimonial-carousel" aria-roledescription="carrusel">
+        <button
+          class="carousel-arrow carousel-arrow-left"
+          type="button"
+          (click)="goToPreviousTestimonial()"
+          aria-label="Ver testimonios anteriores"
+        >
+          ‹
+        </button>
+
+        <div
+          #testimonialViewport
+          class="testimonial-viewport"
+          (touchstart)="onTouchStart($event)"
+          (touchend)="onTouchEnd($event)"
+        >
+          <div class="testimonial-track">
+            @for (testimonial of testimonials(); track testimonial.id) {
+              <article class="testimonial-card">
+                <div
+                  class="testimonial-rating"
+                  [attr.aria-label]="testimonial.rating + ' de 5 estrellas'"
+                >
+                  @for (star of starValues; track star) {
+                    <span aria-hidden="true" [class.is-muted]="star > testimonial.rating">★</span>
+                  }
+                </div>
+                <blockquote>“{{ testimonial.comment }}”</blockquote>
+                <div class="testimonial-person">
+                  <span class="testimonial-avatar" aria-hidden="true">{{
+                    testimonial.initials
+                  }}</span>
+                  <div>
+                    <h3>{{ testimonial.name }}</h3>
+                    <p>{{ testimonial.role }}</p>
+                    <small>{{ testimonial.company }}</small>
+                  </div>
+                </div>
+                <div class="testimonial-meta">
+                  <span>{{ testimonial.projectType }}</span>
+                  @if (testimonial.isDemo) {
+                    <span class="demo-badge">Demo</span>
+                  }
+                </div>
+              </article>
+            }
+          </div>
+        </div>
+
+        <button
+          class="carousel-arrow carousel-arrow-right"
+          type="button"
+          (click)="goToNextTestimonial()"
+          aria-label="Ver testimonios siguientes"
+        >
+          ›
+        </button>
+      </div>
+
+      <div class="carousel-dots" aria-label="Paginación de testimonios">
+        @for (page of carouselPages(); track page) {
+          <button
+            type="button"
+            [class.active]="page === activeTestimonialIndex()"
+            [attr.aria-label]="'Ir al grupo de testimonios ' + (page + 1)"
+            [attr.aria-current]="page === activeTestimonialIndex() ? 'true' : null"
+            (click)="goToTestimonial(page)"
+          ></button>
+        }
+      </div>
     </div>
   </section>
 
