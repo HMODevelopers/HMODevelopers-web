@@ -29,7 +29,7 @@
 </header>
 
 <main id="inicio">
-  <section class="hero shell section">
+  <section class="hero shell section section--light">
     <div class="hero-copy">
       <p class="eyebrow">Tecnología para empresas que quieren avanzar</p>
       <h1>Convierte tus ideas y procesos en soluciones digitales reales</h1>
@@ -77,29 +77,31 @@
     </div>
   </section>
 
-  <section id="como-ayudamos" class="section shell">
-    <div class="section-heading">
-      <p class="eyebrow">¿Qué podemos resolver?</p>
-      <h2>
-        Llegas con una necesidad; nosotros te ayudamos a encontrar el mejor camino con tecnología
-      </h2>
-      <p>
-        Analizamos lo que quieres mejorar y lo convertimos en una solución clara, útil y alineada
-        con tu empresa.
-      </p>
-    </div>
-    <div class="card-grid needs-grid">
-      @for (item of content.needs; track item.title) {
-        <article class="premium-card">
-          <span class="icon">{{ item.icon }}</span>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.description }}</p>
-        </article>
-      }
+  <section id="como-ayudamos" class="section section--soft">
+    <div class="shell">
+      <div class="section-heading">
+        <p class="eyebrow">¿Qué podemos resolver?</p>
+        <h2>
+          Llegas con una necesidad; nosotros te ayudamos a encontrar el mejor camino con tecnología
+        </h2>
+        <p>
+          Analizamos lo que quieres mejorar y lo convertimos en una solución clara, útil y alineada
+          con tu empresa.
+        </p>
+      </div>
+      <div class="card-grid needs-grid">
+        @for (item of content.needs; track item.title) {
+          <article class="premium-card">
+            <span class="icon">{{ item.icon }}</span>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </article>
+        }
+      </div>
     </div>
   </section>
 
-  <section class="section section-tint">
+  <section class="section section--light section-divider">
     <div class="shell">
       <div class="section-heading split-heading">
         <div>
@@ -125,28 +127,30 @@
     </div>
   </section>
 
-  <section id="tecnologia" class="section shell trust-section">
-    <div class="trust-copy">
-      <p class="eyebrow">Base profesional</p>
-      <h2>Tecnología moderna, soluciones bien construidas</h2>
-      <p>
-        No se trata solo de entregar una herramienta. Se trata de crear una base confiable, segura y
-        fácil de usar para que tu empresa pueda operar hoy y crecer mañana.
-      </p>
-      <a class="text-link" href="#proceso">Conoce cómo trabajamos</a>
-    </div>
-    <div class="trust-grid">
-      @for (item of content.trustPoints; track item.title) {
-        <article>
-          <span>0{{ $index + 1 }}</span>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.description }}</p>
-        </article>
-      }
+  <section id="tecnologia" class="section section--soft">
+    <div class="shell trust-section">
+      <div class="trust-copy">
+        <p class="eyebrow">Base profesional</p>
+        <h2>Tecnología moderna, soluciones bien construidas</h2>
+        <p>
+          No se trata solo de entregar una herramienta. Se trata de crear una base confiable, segura
+          y fácil de usar para que tu empresa pueda operar hoy y crecer mañana.
+        </p>
+        <a class="text-link" href="#proceso">Conoce cómo trabajamos</a>
+      </div>
+      <div class="trust-grid">
+        @for (item of content.trustPoints; track item.title) {
+          <article>
+            <span>0{{ $index + 1 }}</span>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </article>
+        }
+      </div>
     </div>
   </section>
 
-  <section id="soluciones" class="section section-dark">
+  <section id="soluciones" class="section section--dark section-dark">
     <div class="shell dark-inner">
       <div class="section-heading">
         <p class="eyebrow">Soluciones que podemos crear</p>
@@ -167,28 +171,30 @@
     </div>
   </section>
 
-  <section class="section shell before-after">
-    <div class="section-heading">
-      <p class="eyebrow">Antes y después</p>
-      <h2>De procesos dispersos a una operación digital más clara</h2>
-    </div>
-    <div class="compare-grid">
-      <article>
-        <div class="compare-label">Antes</div>
-        @for (item of content.before; track item) {
-          <p><span>—</span>{{ item }}</p>
-        }
-      </article>
-      <article class="after">
-        <div class="compare-label">Después</div>
-        @for (item of content.after; track item) {
-          <p><span>✓</span>{{ item }}</p>
-        }
-      </article>
+  <section class="section section--light before-after-section">
+    <div class="shell before-after">
+      <div class="section-heading">
+        <p class="eyebrow">Antes y después</p>
+        <h2>De procesos dispersos a una operación digital más clara</h2>
+      </div>
+      <div class="compare-grid">
+        <article>
+          <div class="compare-label">Antes</div>
+          @for (item of content.before; track item) {
+            <p><span>—</span>{{ item }}</p>
+          }
+        </article>
+        <article class="after">
+          <div class="compare-label">Después</div>
+          @for (item of content.after; track item) {
+            <p><span>✓</span>{{ item }}</p>
+          }
+        </article>
+      </div>
     </div>
   </section>
 
-  <section id="proceso" class="section section-tint">
+  <section id="proceso" class="section section--light section-divider">
     <div class="shell">
       <div class="section-heading">
         <p class="eyebrow">Cómo trabajamos</p>
@@ -206,23 +212,25 @@
     </div>
   </section>
 
-  <section class="section shell use-cases">
-    <div class="section-heading">
-      <p class="eyebrow">Ideas de solución</p>
-      <h2>Ejemplos amplios, pensados para distintas necesidades</h2>
-    </div>
-    <div class="use-case-grid">
-      @for (item of content.useCases; track item.title) {
-        <article>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.description }}</p>
-        </article>
-      }
+  <section class="section section--soft use-cases-section">
+    <div class="shell use-cases">
+      <div class="section-heading">
+        <p class="eyebrow">Ideas de solución</p>
+        <h2>Ejemplos amplios, pensados para distintas necesidades</h2>
+      </div>
+      <div class="use-case-grid">
+        @for (item of content.useCases; track item.title) {
+          <article>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </article>
+        }
+      </div>
     </div>
   </section>
 
   <section
-    class="section testimonials-section"
+    class="section section--light testimonials-section"
     aria-labelledby="testimonials-title"
     (mouseenter)="pauseAutoplay()"
     (mouseleave)="resumeAutoplay()"
@@ -316,25 +324,27 @@
     </div>
   </section>
 
-  <section id="preguntas" class="section shell faq">
-    <div class="section-heading">
-      <p class="eyebrow">Preguntas frecuentes</p>
-      <h2>Respuestas claras antes de iniciar</h2>
-    </div>
-    <div class="faq-list">
-      @for (faq of content.faqs; track faq.question) {
-        <details>
-          <summary>
-            <span>{{ faq.question }}</span
-            ><span class="faq-icon">+</span>
-          </summary>
-          <p>{{ faq.answer }}</p>
-        </details>
-      }
+  <section id="preguntas" class="section section--soft faq-section">
+    <div class="shell faq">
+      <div class="section-heading">
+        <p class="eyebrow">Preguntas frecuentes</p>
+        <h2>Respuestas claras antes de iniciar</h2>
+      </div>
+      <div class="faq-list">
+        @for (faq of content.faqs; track faq.question) {
+          <details>
+            <summary>
+              <span>{{ faq.question }}</span
+              ><span class="faq-icon">+</span>
+            </summary>
+            <p>{{ faq.answer }}</p>
+          </details>
+        }
+      </div>
     </div>
   </section>
 
-  <section id="contacto" class="section contact-section">
+  <section id="contacto" class="section section--light contact-section">
     <div class="shell contact-shell">
       <div class="contact-copy">
         <p class="eyebrow">Contacto</p>
