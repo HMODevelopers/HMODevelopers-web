@@ -22,7 +22,7 @@ export const LANDING_CONTENT = {
     { label: 'Inicio', href: '#inicio' },
     { label: 'Cómo ayudamos', href: '#como-ayudamos' },
     { label: 'Soluciones', href: '#soluciones' },
-    { label: 'Tecnología', href: '#tecnologia' },
+    { label: 'Método', href: '#metodo' },
     { label: 'Proceso', href: '#proceso' },
     { label: 'Preguntas', href: '#preguntas' },
   ] satisfies LinkItem[],
@@ -135,24 +135,25 @@ export const LANDING_CONTENT = {
   ],
   trustPoints: [
     {
-      title: 'Tecnología adecuada',
+      badge: 'Inicio',
+      title: 'Entender',
       description:
-        'No tienes que saber qué tecnología usar. Nosotros te ayudamos a definir el camino correcto.',
+        'Conocemos tu operación, tus procesos y los problemas que hoy te quitan tiempo o generan desorden.',
     },
     {
-      title: 'Preparado para crecer',
+      title: 'Definir',
       description:
-        'Creamos soluciones que pueden empezar por etapas y evolucionar conforme tu operación lo necesite.',
+        'Elegimos la solución adecuada: página web, sistema, automatización, dashboard, integración o plataforma completa.',
     },
     {
-      title: 'Seguridad y estabilidad',
+      title: 'Construir',
       description:
-        'Cuidamos la base técnica, el rendimiento y la confiabilidad para que tu solución funcione correctamente.',
+        'Diseñamos y desarrollamos una herramienta clara, profesional y fácil de usar para tu equipo o tus clientes.',
     },
     {
-      title: 'Experiencia fácil de usar',
+      title: 'Acompañar',
       description:
-        'Diseñamos interfaces claras para que tu equipo o tus clientes adopten la herramienta sin fricción.',
+        'Te ayudamos a publicar, ajustar y preparar la solución para que pueda crecer conforme tu negocio lo necesite.',
     },
   ] satisfies ContentCard[],
   solutions: [
