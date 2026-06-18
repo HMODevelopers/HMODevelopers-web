@@ -2,6 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import {
   Component,
   AfterViewInit,
+  OnDestroy,
   ElementRef,
   PLATFORM_ID,
   ViewChild,
@@ -25,7 +26,7 @@ import { Testimonial } from './models/testimonial.model';
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
 })
-export class LandingPageComponent implements AfterViewInit {
+export class LandingPageComponent implements AfterViewInit, OnDestroy {
   @ViewChild('carouselViewport')
   private carouselViewport?: ElementRef<HTMLElement>;
 
@@ -43,16 +44,19 @@ export class LandingPageComponent implements AfterViewInit {
   protected readonly submitted = signal(false);
   protected readonly formStatus = signal<'idle' | 'success' | 'error'>('idle');
   protected readonly formMessage = signal('');
+  protected readonly showBackToTop = signal(false);
   protected readonly testimonials = signal<Testimonial[]>([]);
   protected readonly activeTestimonialIndex = signal(0);
   protected readonly carouselPageSize = signal(3);
   protected readonly starValues = [1, 2, 3, 4, 5];
   private readonly autoplayMs = 6500;
+  private readonly backToTopThreshold = 420;
   private readonly isBrowser = isPlatformBrowser(this.platformId);
   private autoplayId: ReturnType<typeof setInterval> | null = null;
   private initialScrollId: ReturnType<typeof setTimeout> | null = null;
   private carouselReady = false;
   private touchStartX = 0;
+  private scrollFrameId: number | null = null;
 
   protected readonly carouselPages = computed(() => {
     const total = this.testimonials().length;
@@ -106,6 +110,8 @@ export class LandingPageComponent implements AfterViewInit {
     if (this.isBrowser) {
       this.updateCarouselPageSize();
       window.addEventListener('resize', this.handleResize, { passive: true });
+      window.addEventListener('scroll', this.handleWindowScroll, { passive: true });
+      this.updateBackToTopVisibility();
     }
   }
 
@@ -135,6 +141,12 @@ export class LandingPageComponent implements AfterViewInit {
 
     if (this.isBrowser) {
       window.removeEventListener('resize', this.handleResize);
+      window.removeEventListener('scroll', this.handleWindowScroll);
+
+      if (this.scrollFrameId !== null) {
+        window.cancelAnimationFrame(this.scrollFrameId);
+        this.scrollFrameId = null;
+      }
     }
   }
 
@@ -180,6 +192,34 @@ export class LandingPageComponent implements AfterViewInit {
 
   protected trackTestimonialById(_: number, testimonial: Testimonial): number {
     return testimonial.id;
+  }
+
+  protected scrollToTop(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  private readonly handleWindowScroll = (): void => {
+    if (!this.isBrowser || this.scrollFrameId !== null) {
+      return;
+    }
+
+    this.scrollFrameId = window.requestAnimationFrame(() => {
+      this.scrollFrameId = null;
+      this.updateBackToTopVisibility();
+    });
+  };
+
+  private updateBackToTopVisibility(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    // La visibilidad depende del scroll real y solo se lee en navegador para mantener SSR seguro.
+    this.showBackToTop.set(window.scrollY > this.backToTopThreshold);
   }
 
   private readonly handleResize = (): void => {

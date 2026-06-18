@@ -620,3 +620,12 @@
   </div>
   <div class="shell copyright">© 2026 HMODevelopers. Todos los derechos reservados.</div>
 </footer>
+<button
+  class="back-to-top"
+  [class.back-to-top--visible]="showBackToTop()"
+  type="button"
+  aria-label="Volver al inicio"
+  (click)="scrollToTop()"
+>
+  <span class="back-to-top__arrow" aria-hidden="true"></span>
+</button>
