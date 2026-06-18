@@ -11,19 +11,19 @@ export interface ContentCard {
   badge?: string;
   featured?: boolean;
 }
-export interface ProcessStep extends ContentCard {}
 export interface FaqItem {
   question: string;
   answer: string;
 }
 
 export const LANDING_CONTENT = {
+  // Estructura narrativa: inicio → dolores → transformación → servicios → ejemplos → proceso → confianza → preguntas → contacto.
   navItems: [
     { label: 'Inicio', href: '#inicio' },
-    { label: 'Cómo ayudamos', href: '#como-ayudamos' },
-    { label: 'Soluciones', href: '#soluciones' },
-    { label: 'Método', href: '#metodo' },
-    { label: 'Proceso', href: '#proceso' },
+    { label: 'Cómo te ayudamos', href: '#como-ayudamos' },
+    { label: 'Servicios', href: '#servicios' },
+    { label: 'Ejemplos', href: '#ejemplos' },
+    { label: 'Cómo trabajamos', href: '#como-trabajamos' },
     { label: 'Preguntas', href: '#preguntas' },
   ] satisfies LinkItem[],
   badges: [
@@ -31,66 +31,63 @@ export const LANDING_CONTENT = {
     'Sistemas',
     'Apps',
     'Automatización',
-    'Bots',
-    'Integraciones',
-    'Datos',
-    'Infraestructura',
+    'Conexión de herramientas',
+    'Reportes',
   ],
   needs: [
     {
       icon: '01',
-      title: 'Digitalizar una idea',
+      title: 'Procesos manuales que consumen tiempo',
       description:
-        'Convertimos una necesidad inicial en una presencia digital, app, sistema o plataforma funcional con una ruta clara.',
+        'Cuando tu equipo repite tareas, copia datos entre archivos o depende de pasos manuales para avanzar.',
     },
     {
       icon: '02',
-      title: 'Automatizar tareas',
+      title: 'Información dispersa',
       description:
-        'Diseñamos flujos, bots y procesos que reducen trabajo repetitivo y liberan tiempo del equipo.',
+        'Cuando los datos viven en correos, hojas de cálculo, WhatsApp o sistemas separados y cuesta ver qué está pasando.',
     },
     {
       icon: '03',
-      title: 'Conectar herramientas',
+      title: 'Herramientas desconectadas',
       description:
-        'Integramos formularios, plataformas, sistemas y fuentes de información para que tu operación fluya mejor.',
+        'Cuando formularios, correos, bases de datos o sistemas internos no se comunican y generan doble trabajo.',
     },
     {
       icon: '04',
-      title: 'Entender la información',
+      title: 'Ideas que no sabes cómo aterrizar',
       description:
-        'Transformamos datos dispersos en dashboards, reportes e indicadores comprensibles para decidir con más claridad.',
+        'Cuando tienes una oportunidad digital clara, pero necesitas ordenar alcance, prioridades y primer paso.',
     },
     {
       icon: '05',
-      title: 'Mejorar procesos',
+      title: 'Falta de control operativo',
       description:
-        'Ordenamos pasos, roles y seguimiento para convertir procesos manuales en experiencias digitales más eficientes.',
+        'Cuando es difícil dar seguimiento a clientes, pagos, inventario, solicitudes, servicios o tareas del equipo.',
     },
     {
       icon: '06',
-      title: 'Crear algo a medida',
+      title: 'Reportes difíciles de obtener',
       description:
-        'Cuando una herramienta genérica no encaja, diseñamos una solución específica para tu empresa, negocio o institución.',
+        'Cuando necesitas indicadores claros, pero hoy obtenerlos implica revisar todo manualmente.',
     },
   ] satisfies ContentCard[],
-  // Las capacidades priorizan beneficios claros para que usuarios no técnicos entiendan rápido el valor.
   capabilities: [
     {
       icon: 'web',
       title: 'Presencia digital',
       benefit: 'Te ayuda a verte más profesional y generar más contactos.',
       description:
-        'Creamos páginas web profesionales para que tu negocio inspire confianza, explique claramente lo que ofrece y pueda recibir clientes desde internet.',
-      result: 'Ideal para presentar servicios y atraer oportunidades.',
+        'Creamos sitios web y landing pages que explican tu servicio, transmiten confianza y facilitan que un cliente te contacte.',
+      result: 'Ideal para presentar servicios, campañas o nuevas líneas de negocio.',
     },
     {
       icon: 'systems',
       title: 'Sistemas para tu negocio',
       benefit: 'Te ayuda a trabajar con más orden y menos errores.',
       description:
-        'Desarrollamos herramientas web o móviles para controlar clientes, ventas, registros, pagos, inventario, servicios o procesos que hoy haces en Excel, papel o WhatsApp.',
-      result: 'Ideal para negocios que necesitan centralizar su operación.',
+        'Desarrollamos herramientas para controlar clientes, ventas, registros, pagos, inventario, servicios o procesos internos.',
+      result: 'Ideal para centralizar lo que hoy vive en Excel, papel o mensajes.',
       badge: 'Más solicitado',
       featured: true,
     },
@@ -99,32 +96,32 @@ export const LANDING_CONTENT = {
       title: 'Automatización de tareas',
       benefit: 'Te ayuda a ahorrar tiempo todos los días.',
       description:
-        'Hacemos que tareas repetitivas se realicen solas: enviar avisos, responder mensajes, registrar información, generar reportes o dar seguimiento.',
-      result: 'Ideal para equipos con tareas repetitivas.',
+        'Creamos flujos que envían avisos, registran información, generan seguimientos o reducen trabajo repetitivo.',
+      result: 'Ideal para equipos que quieren operar con menos carga manual.',
     },
     {
       icon: 'integrations',
-      title: 'Conexión entre sistemas',
-      benefit: 'Te ayuda a tener todo conectado.',
+      title: 'Conexión entre herramientas',
+      benefit: 'Te ayuda a tener información sincronizada.',
       description:
-        'Integramos formularios, bases de datos, correos, WhatsApp, sistemas internos o paneles administrativos para que la información no esté duplicada ni separada.',
-      result: 'Ideal para evitar capturas dobles y datos dispersos.',
+        'Conectamos formularios, correos, WhatsApp, bases de datos, sistemas internos o paneles administrativos para que trabajen juntos.',
+      result: 'Ideal para evitar capturas dobles y datos separados.',
     },
     {
       icon: 'data',
       title: 'Datos y reportes',
-      benefit: 'Te ayuda a tomar mejores decisiones.',
+      benefit: 'Te ayuda a tomar decisiones con más claridad.',
       description:
-        'Convertimos tu información en reportes, gráficas e indicadores para que puedas saber cómo va tu negocio sin revisar todo manualmente.',
-      result: 'Ideal para tener visibilidad clara del negocio.',
+        'Organizamos tu información en reportes, gráficas y tableros de indicadores fáciles de consultar.',
+      result: 'Ideal para saber cómo va tu negocio sin revisar todo manualmente.',
     },
     {
       icon: 'infrastructure',
-      title: 'Soporte e infraestructura',
+      title: 'Publicación y soporte técnico',
       benefit: 'Te ayuda a operar con estabilidad.',
       description:
-        'Te apoyamos con dominios, servidores, despliegues, correos, ambientes de prueba, publicación de sistemas y soporte técnico.',
-      result: 'Ideal para publicar, mantener y escalar soluciones.',
+        'Te apoyamos con publicación, servidores, dominios, correos, ambientes de prueba, mantenimiento y soporte técnico.',
+      result: 'Ideal para lanzar, mantener y preparar una solución para crecer.',
     },
   ] satisfies ContentCard[],
   capabilityBenefits: [
@@ -135,139 +132,125 @@ export const LANDING_CONTENT = {
   ],
   trustPoints: [
     {
-      badge: 'Inicio',
-      title: 'Entender',
+      badge: '01',
+      title: 'Entendemos',
       description:
         'Conocemos tu operación, tus procesos y los problemas que hoy te quitan tiempo o generan desorden.',
     },
     {
-      title: 'Definir',
+      badge: '02',
+      title: 'Definimos',
       description:
-        'Elegimos la solución adecuada: página web, sistema, automatización, dashboard, integración o plataforma completa.',
+        'Elegimos la solución adecuada: página web, sistema, automatización, reportes, conexión entre herramientas o plataforma completa.',
     },
     {
-      title: 'Construir',
+      badge: '03',
+      title: 'Diseñamos',
       description:
-        'Diseñamos y desarrollamos una herramienta clara, profesional y fácil de usar para tu equipo o tus clientes.',
+        'Organizamos la experiencia para que la herramienta sea clara, profesional y fácil de usar.',
     },
     {
-      title: 'Acompañar',
+      badge: '04',
+      title: 'Construimos',
+      description:
+        'Desarrollamos la solución cuidando rendimiento, seguridad, estabilidad y mantenimiento.',
+    },
+    {
+      badge: '05',
+      title: 'Acompañamos',
       description:
         'Te ayudamos a publicar, ajustar y preparar la solución para que pueda crecer conforme tu negocio lo necesite.',
     },
   ] satisfies ContentCard[],
-  solutions: [
-    'Página web para presentar tu empresa',
-    'Landing para promocionar un servicio',
-    'Sistema web a medida',
-    'Aplicación móvil',
-    'Automatización con bots o flujos inteligentes',
-    'Integración entre herramientas',
-    'Dashboard para visualizar información',
-    'Reportes ejecutivos',
-    'Procesos de datos',
-    'Modernización de sistemas existentes',
-    'Herramientas internas',
-    'Plataforma completa',
-    'Solución digital personalizada',
-  ],
-  before: [
-    'Ideas sin aterrizar',
-    'Procesos manuales o dispersos',
-    'Herramientas desconectadas',
-    'Información difícil de consultar',
-    'Tareas repetitivas que consumen tiempo',
-  ],
-  after: [
-    'Solución digital clara y funcional',
-    'Procesos mejor organizados',
-    'Herramientas conectadas',
-    'Datos convertidos en visibilidad',
-    'Automatizaciones listas para crecer',
-  ],
-  process: [
+  examples: [
     {
-      title: 'Escuchamos tu necesidad',
+      title: 'Presencia digital para vender mejor',
       description:
-        'Entendemos qué quieres mejorar, construir o automatizar sin obligarte a hablar en términos técnicos.',
+        'Sitios o landing pages que expliquen tu servicio, generen confianza y conviertan visitas en contactos.',
     },
-    {
-      title: 'Analizamos la mejor ruta',
-      description:
-        'Definimos si conviene una página, sistema, app, automatización, integración, dashboard u otra solución.',
-    },
-    {
-      title: 'Diseñamos la propuesta',
-      description:
-        'Aterrizamos alcance, prioridades, experiencia, flujo de trabajo y plan de implementación.',
-    },
-    {
-      title: 'Construimos la solución',
-      description:
-        'Desarrollamos una herramienta moderna, estable y alineada con tu operación real.',
-    },
-    {
-      title: 'Implementamos y mejoramos',
-      description:
-        'La ponemos en marcha, acompañamos la adopción y dejamos una base lista para futuras mejoras.',
-    },
-  ] satisfies ProcessStep[],
-  useCases: [
     {
       title: 'Operación interna más ordenada',
       description:
-        'Un sistema que centraliza solicitudes, registros, seguimiento y reportes para que el equipo trabaje con mayor claridad.',
+        'Sistemas para administrar clientes, registros, pagos, inventario, servicios, solicitudes o procesos internos.',
     },
     {
-      title: 'Presencia digital lista para convertir',
+      title: 'Información clara para decidir',
       description:
-        'Un sitio o landing que explica tu valor, orienta al visitante y facilita iniciar una conversación comercial.',
+        'Paneles de información, reportes e indicadores para saber cómo va tu negocio sin revisar todo manualmente.',
     },
     {
-      title: 'Información ejecutiva en un solo lugar',
+      title: 'Automatización de tareas repetitivas',
       description:
-        'Dashboards que consolidan indicadores, fuentes de datos y reportes para tomar mejores decisiones.',
+        'Flujos que envían avisos, registran información, conectan herramientas o reducen trabajo manual.',
     },
     {
-      title: 'Automatización entre herramientas',
+      title: 'Herramientas conectadas',
       description:
-        'Flujos que conectan formularios, sistemas, mensajes y tareas para reducir pasos manuales.',
+        'Conexión entre formularios, correos, bases de datos, WhatsApp, sistemas internos o paneles administrativos.',
+    },
+    {
+      title: 'Plataformas preparadas para crecer',
+      description:
+        'Soluciones completas que pueden empezar por etapas y evolucionar conforme tu operación lo necesite.',
     },
   ] satisfies ContentCard[],
+  footerServices: [
+    'Presencia digital',
+    'Sistemas para tu negocio',
+    'Automatización de tareas',
+    'Conexión entre herramientas',
+    'Datos y reportes',
+    'Publicación y soporte técnico',
+  ],
+  before: [
+    'Procesos dispersos y difíciles de seguir',
+    'Información repartida en muchos lugares',
+    'Tareas manuales que consumen tiempo',
+    'Herramientas desconectadas entre sí',
+    'Decisiones sin datos claros a la mano',
+  ],
+  after: [
+    'Operación más clara y organizada',
+    'Información centralizada y fácil de consultar',
+    'Tareas repetitivas automatizadas',
+    'Herramientas conectadas para evitar doble trabajo',
+    'Reportes visibles para tener más control',
+  ],
   faqs: [
     {
       question: '¿Necesito saber qué tecnología usar?',
       answer:
-        'No. Tú nos cuentas qué quieres resolver y nosotros te ayudamos a definir el camino, la solución y el alcance adecuado.',
-    },
-    {
-      question: '¿Pueden crear algo desde cero?',
-      answer:
-        'Sí. Podemos ayudarte desde una idea inicial hasta una solución funcional, publicada y lista para usarse.',
-    },
-    {
-      question: '¿Solo hacen páginas web?',
-      answer:
-        'No. Creamos páginas, landing pages, sistemas, aplicaciones, automatizaciones, bots, integraciones, dashboards, infraestructura y soluciones personalizadas.',
-    },
-    {
-      question: '¿Pueden automatizar procesos?',
-      answer:
-        'Sí. Podemos reducir tareas repetitivas mediante flujos automatizados, bots, integraciones o herramientas digitales a medida.',
-    },
-    {
-      question: '¿Pueden mejorar algo que ya tengo?',
-      answer:
-        'Sí. Revisamos soluciones existentes, detectamos oportunidades y proponemos una ruta de modernización o mejora.',
+        'No. Tú nos cuentas qué quieres resolver y nosotros te ayudamos a definir la solución y el alcance adecuado.',
     },
     {
       question: '¿Puedo empezar con algo pequeño?',
-      answer: 'Sí. Podemos iniciar con una primera versión enfocada y hacerla crecer por etapas.',
+      answer:
+        'Sí. Podemos iniciar con una primera versión enfocada, medir su utilidad y hacerla crecer por etapas.',
     },
     {
-      question: '¿También ayudan con dominios, servidores o despliegues?',
+      question: '¿También mejoran sistemas existentes?',
       answer:
-        'Sí. Podemos apoyarte con la parte técnica necesaria para que tu solución funcione correctamente y tenga una base estable.',
+        'Sí. Revisamos lo que ya tienes, detectamos oportunidades de mejora y proponemos una ruta clara para modernizarlo.',
+    },
+    {
+      question: '¿Me ayudan a definir qué necesito?',
+      answer:
+        'Sí. Parte de nuestro trabajo es ordenar la idea, priorizar necesidades y recomendar el primer paso más conveniente.',
+    },
+    {
+      question: '¿Qué pasa después de publicar?',
+      answer:
+        'Podemos acompañarte con ajustes, soporte, mantenimiento y nuevas etapas según lo que tu operación necesite.',
+    },
+    {
+      question: '¿Pueden ayudar con dominio, servidor o correo?',
+      answer:
+        'Sí. Te apoyamos con publicación, servidores, dominios, correos y la configuración técnica necesaria para operar.',
+    },
+    {
+      question: '¿Cómo se define el alcance del proyecto?',
+      answer:
+        'Primero entendemos el objetivo, luego definimos prioridades, entregables y una ruta de implementación clara.',
     },
   ] satisfies FaqItem[],
 };

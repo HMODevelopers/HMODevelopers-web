@@ -81,7 +81,7 @@ export class LandingPageComponent implements AfterViewInit {
     this.meta.updateTag({
       name: 'description',
       content:
-        'Creamos páginas web, sistemas, aplicaciones, automatizaciones, bots, integraciones, dashboards y soluciones digitales a medida para empresas y negocios.',
+        'Creamos páginas web, sistemas, aplicaciones, automatizaciones, conexión entre herramientas, reportes y soluciones digitales a medida para empresas y negocios.',
     });
     this.meta.updateTag({
       property: 'og:title',
@@ -90,7 +90,7 @@ export class LandingPageComponent implements AfterViewInit {
     this.meta.updateTag({
       property: 'og:description',
       content:
-        'Creamos páginas web, sistemas, aplicaciones, automatizaciones, bots, integraciones, dashboards y soluciones digitales a medida para empresas y negocios.',
+        'Creamos páginas web, sistemas, aplicaciones, automatizaciones, conexión entre herramientas, reportes y soluciones digitales a medida para empresas y negocios.',
     });
     this.meta.updateTag({ property: 'og:type', content: 'website' });
     this.meta.updateTag({ property: 'og:locale', content: 'es_DO' });

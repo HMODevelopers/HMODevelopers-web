@@ -35,7 +35,7 @@
       <h1>Convierte tus ideas y procesos en soluciones digitales reales</h1>
       <p class="hero-lead">
         En HMODevelopers te ayudamos a transformar necesidades de negocio en páginas, sistemas,
-        apps, automatizaciones, bots, integraciones, dashboards y soluciones a medida.
+        apps, automatizaciones, conexión entre herramientas, reportes y soluciones a medida.
       </p>
       <p class="hero-support">
         No necesitas saber qué tecnología usar. Tú nos cuentas qué quieres mejorar, construir o
@@ -44,7 +44,7 @@
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#contacto">Solicitar asesoría</a
-        ><a class="btn btn-secondary" href="#soluciones">Explorar soluciones</a>
+        ><a class="btn btn-secondary" href="#como-ayudamos">Ver cómo te ayudamos</a>
       </div>
       <div class="badges" aria-label="Capacidades destacadas">
         @for (badge of content.badges; track badge) {
@@ -68,8 +68,8 @@
         ><span>Construida para operar y crecer</span>
       </div>
       <div class="node node-a">WEB</div>
-      <div class="node node-b">API</div>
-      <div class="node node-c">BI</div>
+      <div class="node node-b">SIS</div>
+      <div class="node node-c">DATOS</div>
       <div class="node node-d">BOT</div>
       <div class="value-flow">
         <span>Necesidad</span><span>Estrategia</span><span>Solución</span><span>Crecimiento</span>
@@ -101,16 +101,39 @@
     </div>
   </section>
 
-  <section class="section section--light section-divider">
+  <section class="section section--light before-after-section">
+    <div class="shell before-after">
+      <div class="section-heading">
+        <p class="eyebrow">Antes y después</p>
+        <h2>De procesos dispersos a una operación digital más clara</h2>
+      </div>
+      <div class="compare-grid">
+        <article>
+          <div class="compare-label">Antes</div>
+          @for (item of content.before; track item) {
+            <p><span>—</span>{{ item }}</p>
+          }
+        </article>
+        <article class="after">
+          <div class="compare-label">Después</div>
+          @for (item of content.after; track item) {
+            <p><span>✓</span>{{ item }}</p>
+          }
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios" class="section section--light section-divider">
     <div class="shell">
       <div class="section-heading split-heading capability-heading">
         <div>
-          <p class="eyebrow">Capacidades tecnológicas</p>
-          <h2>Soluciones digitales para que tu negocio trabaje mejor</h2>
+          <p class="eyebrow">Servicios</p>
+          <h2>Servicios para digitalizar tu negocio</h2>
         </div>
         <p>
-          Creamos páginas, sistemas, automatizaciones e integraciones que ayudan a vender mejor,
-          ahorrar tiempo, organizar procesos y tomar decisiones con información real.
+          Creamos páginas, sistemas, automatizaciones y conexiones entre herramientas que ayudan a
+          vender mejor, ahorrar tiempo, organizar procesos y tomar decisiones con información real.
         </p>
       </div>
 
@@ -206,30 +229,52 @@
     </div>
   </section>
 
-  <section id="metodo" class="section section--soft" aria-labelledby="method-title">
+  <section id="ejemplos" class="section section--dark section-dark">
+    <div class="shell dark-inner">
+      <div class="section-heading">
+        <p class="eyebrow">Ejemplos</p>
+        <h2>Ejemplos de proyectos que podemos crear</h2>
+        <p>
+          No necesitas llegar con una lista técnica. Estos son tipos de soluciones que podemos
+          adaptar a la realidad de tu negocio.
+        </p>
+      </div>
+      <div class="solution-list">
+        @for (example of content.examples; track example.title) {
+          <article>
+            <span>✦</span>
+            <h3>{{ example.title }}</h3>
+            <p>{{ example.description }}</p>
+          </article>
+        }
+      </div>
+      <div class="dark-cta">
+        <p>Si tu idea todavía no está clara, podemos ayudarte a definir el primer paso.</p>
+        <a class="btn btn-primary" href="#contacto">Te ayudamos a definirlo</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="como-trabajamos" class="section section--soft" aria-labelledby="method-title">
     <div class="shell trust-section">
       <div class="trust-copy">
-        <p class="eyebrow">Nuestra forma de trabajar</p>
+        <p class="eyebrow">Cómo trabajamos</p>
         <h2 id="method-title">Primero entendemos tu negocio. Después construimos la solución.</h2>
         <p>
-          No creemos en desarrollar por desarrollar. Revisamos tu operación, detectamos oportunidades
-          de mejora y definimos una solución clara, útil y preparada para crecer contigo.
+          No creemos en desarrollar por desarrollar. Revisamos tu operación, detectamos
+          oportunidades de mejora y definimos una solución clara, útil y preparada para crecer
+          contigo.
         </p>
         <div class="trust-highlight">
           <p>La tecnología debe hacer tu trabajo más fácil, no más complicado.</p>
         </div>
-        <a class="text-link" href="#proceso" aria-label="Conoce nuestro proceso de trabajo">
-          Conoce nuestro proceso
-        </a>
+        <a class="btn btn-secondary" href="#contacto">Hablemos de tu proyecto</a>
       </div>
-      <div class="trust-grid" aria-label="Ruta de trabajo de HMODevelopers">
+      <div class="trust-grid" aria-label="Proceso de trabajo de HMODevelopers">
         @for (item of content.trustPoints; track item.title) {
           <article class="trust-step">
             <div class="trust-step-header">
-              <span class="trust-step-number">0{{ $index + 1 }}</span>
-              @if (item.badge) {
-                <span class="trust-step-badge">{{ item.badge }}</span>
-              }
+              <span class="trust-step-number">{{ item.badge }}</span>
             </div>
             <h3>{{ item.title }}</h3>
             <p>{{ item.description }}</p>
@@ -239,85 +284,6 @@
           Ya sea una página sencilla o una plataforma completa, empezamos igual: entendiendo qué
           necesita realmente tu negocio.
         </p>
-      </div>
-    </div>
-  </section>
-
-  <section id="soluciones" class="section section--dark section-dark">
-    <div class="shell dark-inner">
-      <div class="section-heading">
-        <p class="eyebrow">Soluciones que podemos crear</p>
-        <h2>Desde una landing puntual hasta una plataforma completa</h2>
-        <p>
-          Cada empresa necesita una ruta distinta. Podemos iniciar pequeño, modernizar lo existente
-          o construir una solución a medida desde cero.
-        </p>
-      </div>
-      <div class="solution-list">
-        @for (solution of content.solutions; track solution) {
-          <article>
-            <span>✦</span>
-            <h3>{{ solution }}</h3>
-          </article>
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--light before-after-section">
-    <div class="shell before-after">
-      <div class="section-heading">
-        <p class="eyebrow">Antes y después</p>
-        <h2>De procesos dispersos a una operación digital más clara</h2>
-      </div>
-      <div class="compare-grid">
-        <article>
-          <div class="compare-label">Antes</div>
-          @for (item of content.before; track item) {
-            <p><span>—</span>{{ item }}</p>
-          }
-        </article>
-        <article class="after">
-          <div class="compare-label">Después</div>
-          @for (item of content.after; track item) {
-            <p><span>✓</span>{{ item }}</p>
-          }
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="proceso" class="section section--light section-divider">
-    <div class="shell">
-      <div class="section-heading">
-        <p class="eyebrow">Cómo trabajamos</p>
-        <h2>Un proceso claro desde la idea hasta la implementación</h2>
-      </div>
-      <div class="timeline">
-        @for (step of content.process; track step.title) {
-          <article>
-            <span>{{ $index + 1 }}</span>
-            <h3>{{ step.title }}</h3>
-            <p>{{ step.description }}</p>
-          </article>
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--soft use-cases-section">
-    <div class="shell use-cases">
-      <div class="section-heading">
-        <p class="eyebrow">Ideas de solución</p>
-        <h2>Ejemplos amplios, pensados para distintas necesidades</h2>
-      </div>
-      <div class="use-case-grid">
-        @for (item of content.useCases; track item.title) {
-          <article>
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.description }}</p>
-          </article>
-        }
       </div>
     </div>
   </section>
@@ -332,16 +298,12 @@
   >
     <div class="shell testimonials-shell">
       <div class="section-heading testimonials-heading">
-        <p class="eyebrow">Testimonios</p>
-        <h2 id="testimonials-title">Confianza que se construye proyecto a proyecto</h2>
+        <p class="eyebrow">Confianza</p>
+        <h2 id="testimonials-title">Qué puedes esperar al trabajar con HMODevelopers</h2>
         <p>
-          Aunque cada colaboración es distinta, nuestra forma de trabajar se basa en comunicación
-          clara, soluciones funcionales y compromiso con los resultados.
+          Estos compromisos guían cada proyecto: claridad, comunicación y soluciones pensadas para
+          que tu operación trabaje mejor.
         </p>
-        <!-- Texto demostrativo fácil de ocultar cuando existan testimonios reales. -->
-        <small class="demo-disclaimer">
-          Contenido demostrativo preparado para futura integración con clientes reales.
-        </small>
       </div>
 
       <div class="testimonial-carousel" aria-roledescription="carrusel">
@@ -349,7 +311,7 @@
           class="carousel-arrow carousel-arrow-left"
           type="button"
           (click)="goToPreviousTestimonial()"
-          aria-label="Ver testimonios anteriores"
+          aria-label="Ver compromisos anteriores"
         >
           ‹
         </button>
@@ -397,18 +359,18 @@
           class="carousel-arrow carousel-arrow-right"
           type="button"
           (click)="goToNextTestimonial()"
-          aria-label="Ver testimonios siguientes"
+          aria-label="Ver compromisos siguientes"
         >
           ›
         </button>
       </div>
 
-      <div class="carousel-dots" aria-label="Paginación de testimonios">
+      <div class="carousel-dots" aria-label="Paginación de compromisos">
         @for (page of carouselPages(); track page) {
           <button
             type="button"
             [class.active]="page === activeTestimonialIndex()"
-            [attr.aria-label]="'Ir al grupo de testimonios ' + (page + 1)"
+            [attr.aria-label]="'Ir al grupo de compromisos ' + (page + 1)"
             [attr.aria-current]="page === activeTestimonialIndex() ? 'true' : null"
             (click)="goToTestimonial(page)"
           ></button>
@@ -645,9 +607,9 @@
       }
     </div>
     <div>
-      <h3>Soluciones</h3>
-      @for (solution of content.solutions.slice(0, 6); track solution) {
-        <a href="#soluciones">{{ solution }}</a>
+      <h3>Servicios principales</h3>
+      @for (service of content.footerServices; track service) {
+        <a href="#servicios">{{ service }}</a>
       }
     </div>
     <div>

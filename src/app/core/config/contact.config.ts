@@ -8,7 +8,7 @@ export const CONTACT_CONFIG = {
   messageCta: 'Enviar mensaje',
   // Endpoint centralizado para la fase backend; se activa cambiando useMockSubmit a false.
   apiEndpoint: '/api/contacto/solicitudes',
-  // Modo temporal para mantener una experiencia completa mientras se implementa la API oficial.
+  // Modo temporal para mantener una experiencia completa mientras se implementa el servicio oficial.
   useMockSubmit: true,
   needOptions: [
     { value: 'website', label: 'Crear una página web' },
@@ -17,7 +17,7 @@ export const CONTACT_CONFIG = {
     { value: 'automation', label: 'Automatizar un proceso' },
     { value: 'bot-assistant', label: 'Crear un bot o asistente' },
     { value: 'tool-integration', label: 'Conectar herramientas o sistemas' },
-    { value: 'dashboard-reports', label: 'Crear reportes o dashboards' },
+    { value: 'dashboard-reports', label: 'Crear reportes o paneles de información' },
     { value: 'improve-existing', label: 'Mejorar algo que ya existe' },
     { value: 'advisory-needed', label: 'No estoy seguro, necesito orientación' },
     { value: 'other', label: 'Otro' },
