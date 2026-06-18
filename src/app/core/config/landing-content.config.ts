@@ -6,6 +6,10 @@ export interface ContentCard {
   title: string;
   description: string;
   icon?: string;
+  benefit?: string;
+  result?: string;
+  badge?: string;
+  featured?: boolean;
 }
 export interface ProcessStep extends ContentCard {}
 export interface FaqItem {
@@ -70,44 +74,65 @@ export const LANDING_CONTENT = {
         'Cuando una herramienta genérica no encaja, diseñamos una solución específica para tu empresa, negocio o institución.',
     },
   ] satisfies ContentCard[],
+  // Las capacidades priorizan beneficios claros para que usuarios no técnicos entiendan rápido el valor.
   capabilities: [
     {
-      icon: 'WEB',
+      icon: 'web',
       title: 'Presencia digital',
+      benefit: 'Te ayuda a verte más profesional y generar más contactos.',
       description:
-        'Sitios corporativos y landing pages con mensaje claro, estructura comercial y experiencia profesional.',
+        'Creamos páginas web profesionales para que tu negocio inspire confianza, explique claramente lo que ofrece y pueda recibir clientes desde internet.',
+      result: 'Ideal para presentar servicios y atraer oportunidades.',
     },
     {
-      icon: 'SYS',
-      title: 'Sistemas y plataformas',
+      icon: 'systems',
+      title: 'Sistemas para tu negocio',
+      benefit: 'Te ayuda a trabajar con más orden y menos errores.',
       description:
-        'Herramientas web o móviles para administrar, registrar, consultar, operar o dar seguimiento a procesos.',
+        'Desarrollamos herramientas web o móviles para controlar clientes, ventas, registros, pagos, inventario, servicios o procesos que hoy haces en Excel, papel o WhatsApp.',
+      result: 'Ideal para negocios que necesitan centralizar su operación.',
+      badge: 'Más solicitado',
+      featured: true,
     },
     {
-      icon: 'BOT',
-      title: 'Automatización y bots',
+      icon: 'automation',
+      title: 'Automatización de tareas',
+      benefit: 'Te ayuda a ahorrar tiempo todos los días.',
       description:
-        'Asistentes, flujos inteligentes y automatizaciones que ayudan a responder más rápido y trabajar mejor.',
+        'Hacemos que tareas repetitivas se realicen solas: enviar avisos, responder mensajes, registrar información, generar reportes o dar seguimiento.',
+      result: 'Ideal para equipos con tareas repetitivas.',
     },
     {
-      icon: 'API',
-      title: 'Integraciones',
+      icon: 'integrations',
+      title: 'Conexión entre sistemas',
+      benefit: 'Te ayuda a tener todo conectado.',
       description:
-        'Conectamos servicios, plataformas y fuentes de datos para evitar información aislada o procesos duplicados.',
+        'Integramos formularios, bases de datos, correos, WhatsApp, sistemas internos o paneles administrativos para que la información no esté duplicada ni separada.',
+      result: 'Ideal para evitar capturas dobles y datos dispersos.',
     },
     {
-      icon: 'BI',
-      title: 'Datos e inteligencia',
+      icon: 'data',
+      title: 'Datos y reportes',
+      benefit: 'Te ayuda a tomar mejores decisiones.',
       description:
-        'Dashboards, reportes ejecutivos, indicadores y procesos de datos para tener visibilidad real.',
+        'Convertimos tu información en reportes, gráficas e indicadores para que puedas saber cómo va tu negocio sin revisar todo manualmente.',
+      result: 'Ideal para tener visibilidad clara del negocio.',
     },
     {
-      icon: 'OPS',
-      title: 'Infraestructura tecnológica',
+      icon: 'infrastructure',
+      title: 'Soporte e infraestructura',
+      benefit: 'Te ayuda a operar con estabilidad.',
       description:
-        'Dominios, servidores, despliegues, ambientes y soporte técnico para operar con estabilidad.',
+        'Te apoyamos con dominios, servidores, despliegues, correos, ambientes de prueba, publicación de sistemas y soporte técnico.',
+      result: 'Ideal para publicar, mantener y escalar soluciones.',
     },
   ] satisfies ContentCard[],
+  capabilityBenefits: [
+    'Más control de tu operación',
+    'Menos trabajo manual',
+    'Mejor atención al cliente',
+    'Información clara para decidir',
+  ],
   trustPoints: [
     {
       title: 'Tecnología adecuada',
